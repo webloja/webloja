@@ -1,0 +1,7 @@
+parameters:
+#    grl.example.class: webloja\GrlBundle\Example
+
+services:
+#    grl.example:
+#        class: %grl.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

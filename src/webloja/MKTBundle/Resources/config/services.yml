@@ -1,0 +1,7 @@
+parameters:
+#    mkt.example.class: webloja\MktBundle\Example
+
+services:
+#    mkt.example:
+#        class: %mkt.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

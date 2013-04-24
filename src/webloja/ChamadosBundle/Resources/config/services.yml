@@ -1,0 +1,7 @@
+parameters:
+#    chamados.example.class: webloja\ChamadosBundle\Example
+
+services:
+#    chamados.example:
+#        class: %chamados.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

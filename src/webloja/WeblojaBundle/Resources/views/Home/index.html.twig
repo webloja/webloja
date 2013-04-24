@@ -1,0 +1,45 @@
+{% extends '::webloja.html.twig' %}
+{% block menuNav %} {% endblock %}
+
+{% block body %}
+<div class='span4'></div>
+<div class='span4'>
+    <div class="well well-small" style='margin-top: 160px;'>
+        <form action="webloja" method="post" {{ form_enctype(form) }}>       
+            <div class="control-group">
+                <div class="controls text-center">
+                    <label class="control-label"><strong>&Aacute;rea Restrita</strong></label>
+                </div>
+            </div>
+                {{ form_errors(form) }}
+            <div class="text-exception" style="color: red;">{{ form_errors(form.login) }}</div>
+            <div class="text-exception" style="color: red;">{{ form_errors(form.senha) }}</div>
+            <hr />
+            <div class="control-group">
+                    {{ form_label(form.login,'Login',{'label_attr': {'class': 'span3'}}) }}
+                    <div class="controls"> 
+                    {{ form_widget(form.login,{ 'attr': {'class': 'span8'} }) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                {{ form_label(form.senha,'Senha',{'label_attr': {'class': 'span3'}}) }}
+                            <div class="controls">
+                    {{ form_widget(form.senha,{ 'attr': {'class': 'span8'} }) }}
+                                </div>
+                            </div>
+            {{ form_rest(form) }}
+                            <div class="control-group">
+                                <div class="controls text-center">
+                                    <button type="submit" class="btn btn-danger">Entrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-error">
+                        {{ flashMessage }}
+                </div>
+                {% endfor %}
+</div>
+<div class='span4'></div>
+{% endblock %}

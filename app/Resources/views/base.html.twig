@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/segundo/css/theme.blue.css') }}">
+        <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/segundo/css/theme.jui.css') }}"> 
+        {% endblock %} 
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body style="margin: 0 0 0 0;">
+        <div style='margin-top: 0; height: 160px; background-color: #000;'>
+            <div style="float: right; margin-right: 20px; height: 120px; margin-bottom: 20px; margin-top: 20px; width: 300px; background-color: #fff;">
+
+            </div>
+        </div>
+        <div style='margin-top: 0; height: 25px; background-color: #99b3e6;'>
+            <ul style="padding:0px; margin-left:10px; margin-top: 0px; list-style:none; font-size: larger;">
+                <li style='display: inline;'><a style='color: #fff; font-weight: bold; text-decoration: none;' href="listar_produto_tipo">Listar Produto | </li>
+                <li style='display: inline;'><a style='color: #fff; font-weight: bold; text-decoration: none;' href="add_tipo">Cadastrar Tipo Produto | </li>
+                <li style='display: inline;'><a style='color: #fff; font-weight: bold; text-decoration: none;' href="manter_produto">Cadastrar Produto | </li>
+            </ul>
+        </div>
+        <div id='center' style="margin: 50px 50px 50px 50px">
+        {% block body %}{% endblock %}
+            </div>
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bundles/segundo/js/jquery.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/segundo/js/jquery.tablesorter.js') }}"></script>
+            <script src="{{ asset('bundles/segundo/js/jquery.tablesorter.widgets.js') }}"></script>
+
+            <script>
+                $(function() {
+                    // call the tablesorter plugin  
+                    $("table").tablesorter({
+                        theme: 'blue',
+                        sortList: [[0, 0], [2, 0]],
+                        headerTemplate: '{content} {icon}',
+                        widgets: ["filter", "zebra"],
+                        widgetOptions: {filter_cssFilter: 'tablesorter-filter',
+                            filter_childRows: false,
+                            filter_hideFilters: false,
+                            filter_ignoreCase: true,
+                            filter_startsWith: false
+                        }
+                    });
+                });
+                </script> 
+        {% endblock %}
+            </body>
+        </html>

@@ -1,0 +1,11 @@
+login:
+    pattern:  /webloja
+    defaults: { _controller: WeblojaBundle:Login:index }
+    
+principal:
+    pattern:  /home
+    defaults: { _controller: WeblojaBundle:Home:index }
+       
+logout:
+    pattern:  /logout
+    defaults: { _controller: WeblojaBundle:Home:logout }
