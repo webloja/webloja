@@ -14,6 +14,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="webloja\WeblojaBundle\Repository\UsuarioRepository")
  */
 class Usuario{
+
+   /**
+     * @ORM\ManyToOne(targetEntity="Perfil")
+     * @ORM\JoinColumn(name="id_perfil", referencedColumnName="id_perfil")
+     */
+    protected $perfil; 
+    
     /**
      * @var integer
      *
@@ -54,14 +61,12 @@ class Usuario{
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="id_perfil", type="integer")
      */
     private $idPerfil;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="nome", type="string", length=100)
      */
     private $nome;
@@ -258,5 +263,18 @@ class Usuario{
     {
         return $this->ativo;
     }
+    
+    public function setPerfil($perfil)
+    {
+        $this->perfil = $perfil;
+    
+        return $this;
+    }
+    
+     public function getPerfil()
+    {
+        return $this->perfil;
+    }
+    
 
 }
