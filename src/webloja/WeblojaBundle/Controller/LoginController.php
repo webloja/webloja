@@ -27,16 +27,27 @@ class LoginController extends Controller
                     
                     $data = $form->getData();
                     $senha = base64_encode($data->getSenha());
-                
+                    
+                    /**
+                     * Retorna os dados do Usuario de acordo com o login e a senha
+                     */
                     $login = $this->getDoctrine()->getRepository("WeblojaBundle:Usuario")
                         ->getUsuarioSenha($data->getLogin(),$senha);
-               
-//    $titulo_perfil = TSession::getValue('titulo_perfil'); pegar na tabela perfil                       
+                    
+                    /**
+                     * Retorna o perfil de acordo com o id do perfil capiturado pela consulta anterior
+                     */
+                    $perfil = $this->getDoctrine()->getRepository("WeblojaBundle:Perfil")
+                            ->getPerfil($login->getIdPerfil());
                         
+                    /**
+                     * Cria e atribiu valor as variáveis de sessão
+                     */
                         $session->set("id_user", $login->getId());
                         $session->set("login", $login->getLogin());
                         $session->set("local", $login->getLocal());
                         $session->set("id_perfil", $login->getIdPerfil());
+                        $session->set("titulo_perfil", $perfil->getPerfil());
                         $session->set("nome", $login->getNome());
                         $session->set("loja_user", $login->getLocal());
                         
@@ -55,9 +66,6 @@ class LoginController extends Controller
                     $this->get('session')->getFlashBag()->add('notice', "Usuário ou senha inválido!");
                     return $this->redirect($this->generateUrl('login'));
                 }
-
-                
-            
             }
         }
 
