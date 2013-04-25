@@ -11,6 +11,7 @@ class HomeController extends Controller
     
     public function indexAction()
     {
+        
         $this->conn = $this->get('database_connection');
         
         $session = $this->getRequest()->getSession();
