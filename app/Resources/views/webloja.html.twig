@@ -53,7 +53,7 @@
         {% endblock %}
                 <header>
                 {% block menuNav %}
-                    {% include '::menuNav.html.twig'%}        
+                    {{ render(controller('WeblojaBundle:Menu:menu')) }}     
                 {% endblock %}
                 </header>
                 <div id="content">
