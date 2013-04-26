@@ -10,6 +10,11 @@ class LoginController extends Controller
     public function indexAction()
     {
         $session = $this->getRequest()->getSession();
+        
+        if($session->get('id_user')){
+            $session->clear();
+        }
+        
         $usuario = new Usuario();
        
         $form = $this->createFormBuilder($usuario)
@@ -39,7 +44,14 @@ class LoginController extends Controller
                      */
                     $perfil = $this->getDoctrine()->getRepository("WeblojaBundle:Perfil")
                             ->getPerfil($login->getIdPerfil());
+                    
+                    /**
+                     * Pega a loja que é central regional e joga na sessão
+                     */
+                    if (preg_replace("/[^A-z]/", "", $login->getLocal()) == "CR") {
                         
+                        $session->set("central_regional", $login->getLocal());
+                    }
                     /**
                      * Cria e atribiu valor as variáveis de sessão
                      */
@@ -49,6 +61,7 @@ class LoginController extends Controller
                         $session->set("id_perfil", $login->getIdPerfil());
                         $session->set("titulo_perfil", $perfil->getPerfil());
                         $session->set("nome", $login->getNome());
+                        $session->set("data_criacao", $login->getDataCriacao());
                         $session->set("loja_user", $login->getLocal());
                         
                         if(date("H:i:s") <= 12){
