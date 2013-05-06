@@ -1,3 +1,11 @@
-chamados_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ChamadosBundle:Default:index }
+Ocorrencia:
+    pattern:  /Ocorrencia/{id_interno}
+    defaults: { _controller: ChamadosBundle:Chamados:index }
+    
+select_modulos:
+    pattern:  /Modulos
+    defaults: { _controller: ChamadosBundle:Chamados:modulo }
+    
+select_links:
+    pattern:  /Links
+    defaults: { _controller: ChamadosBundle:Chamados:link }
