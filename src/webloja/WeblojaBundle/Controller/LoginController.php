@@ -4,11 +4,11 @@ namespace webloja\WeblojaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use webloja\WeblojaBundle\Entity\Usuario;
+use webloja\WeblojaBundle\Repository\MenuRepository;
 
 class LoginController extends Controller
 {
-    public function indexAction()
-    {
+    public function indexAction(){
         $session = $this->getRequest()->getSession();
         
         if($session->get('id_user')){
@@ -72,6 +72,20 @@ class LoginController extends Controller
                         
                         $session->set("boasVindas", $boasVindas);                  
                     
+                        $conn = $this->get('database_connection');
+      
+                        /**
+                         * Criando o memu do sistema de acordo com o perfil do usuario
+                         * logado.
+                         */
+                        if (preg_replace("/[^A-z]/", "", $login->getLocal()) == "CR") {
+                            $cr = "CR"; 
+                        }else{
+                            $cr = null;
+                        }
+                        
+                        MenuRepository::geraMenuHtml($login->getIdPerfil(),$conn,$cr);
+                        
                     return $this->redirect($this->generateUrl('principal'));
                     
                 } catch (\Exception $e) {
@@ -86,4 +100,5 @@ class LoginController extends Controller
         return $this->render('WeblojaBundle:Home:index.html.twig', array(
                     'form' => $form->createView()));
     }
+   
 }
