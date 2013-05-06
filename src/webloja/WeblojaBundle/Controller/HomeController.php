@@ -9,13 +9,15 @@ class HomeController extends Controller
 {
     private $conn;
     
-    public function indexAction()
-    {
+    public function indexAction(){
+        
         
         $this->conn = $this->get('database_connection');
         
         $session = $this->getRequest()->getSession();
+        $session->remove('id_interno');
         $loja = $session->get('local');
+        
         
         if(!$session->get('id_user')){
             
