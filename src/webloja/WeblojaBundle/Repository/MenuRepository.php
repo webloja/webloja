@@ -54,29 +54,28 @@ class MenuRepository {
 
         $rMenu = MenuRepository::getMenu($id_perfil, $conn);
 
-        $menuNav = '<div class = "navbar">';
-        $menuNav .= '<div class = "navbar-inner">';
-        $menuNav .= '<div class = "container">';
-        $menuNav .= '<div class = "nav-collapse collapse navbar-responsive-collapse">';
-        $menuNav .= '<ul class = "nav">';
-        $menuNav .= '<li><a href = "'."{{ path('principal') }}".'">Home</a></li>';
+        $menuNav = '<div class = "navbar">'."\n";
+        $menuNav .= '<div class = "navbar-inner">'."\n";
+        $menuNav .= '<div class = "container">'."\n";
+        $menuNav .= '<ul class = "nav">'."\n";
+        $menuNav .= '<li><a href = "'."{{ path('principal') }}".'">Home</a></li>'."\n";
 
         //montar menu departamentos
         for ($i = 0; $i < count($rMenu); $i++) {
-            $menuNav .= '<li class = "dropdown">';
-            $menuNav .= '<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" >' . $rMenu[$i]["departamento"] . '<b class = "caret"></b></a>';
+            $menuNav .= '<li class = "dropdown">'."\n";
+            $menuNav .= '<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" >' . $rMenu[$i]["departamento"] . '<b class = "caret"></b></a>'."\n";
 
             //subMenu
             $rSubMenu = MenuRepository::getSubMenu($rMenu[$i]["id_departamento"], $id_perfil, $conn);
-            $menuNav .= '<ul class="dropdown-menu">';
+            $menuNav .= '<ul class="dropdown-menu">'."\n";
             for ($j = 0; $j < count($rSubMenu); $j++) {
-                $menuNav .= '<li class="dropdown-submenu">';
-                $menuNav .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">' . $rSubMenu[$j]["menu"] . '</a>';
+                $menuNav .= '<li class="dropdown-submenu">'."\n";
+                $menuNav .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">' . $rSubMenu[$j]["menu"] . '</a>'."\n";
                 //dados para o menu interno
 
                 $rSubMenuInterno = MenuRepository::getSubMenuInterno($rSubMenu[$j]["id_menu"], $conn, $cr);
                
-                $menuNav .= '<ul class="dropdown-menu">';
+                $menuNav .= '<ul class="dropdown-menu">'."\n";
       
                 for ($si = 0; $si < count($rSubMenuInterno); $si++) {
 
@@ -89,13 +88,13 @@ class MenuRepository {
                             }else{
                                 $rotaFinal="{{ path('principal') }}";
                             }
-                            $menuNav .= '<li><a href="' . $rotaFinal .'">' . $rSubMenuInterno[$si]["titulo"] . '</a></li>';
+                            $menuNav .= '<li><a href="' . $rotaFinal .'">' . $rSubMenuInterno[$si]["titulo"] . '</a></li>'."\n";
                  }else{
                          $rSubMenuInterno2 = MenuRepository::getSubMenuInternoNivel2($rSubMenu[$j]["id_menu"], $conn);
                          for($mi=0;$mi<count($rSubMenuInterno2);$mi++){
                          $menuNav .='<li class="dropdown-submenu">';           
-                             $menuNav .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">' . $rSubMenuInterno2[$mi]["titulo"] . '</a>';                    
-                             $menuNav .= '<ul class="dropdown-menu">';
+                             $menuNav .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">' . $rSubMenuInterno2[$mi]["titulo"] . '</a>'."\n";                    
+                             $menuNav .= '<ul class="dropdown-menu">'."\n";
                              $rSubMenuInterno3 = MenuRepository::getSubMenuInternoNivel3($rSubMenuInterno2[$mi]["pai"], $conn);
                                 for ($u = 0; $u < count($rSubMenuInterno3); $u++) {
                                     $rotaI1 = $rSubMenuInterno3[$u]["rota"];
@@ -105,25 +104,24 @@ class MenuRepository {
                                     }else{
                                         $rotaFinalI="{{ path('principal') }}";
                                     }
-                                    $menuNav .= '<li><a href="' . $rotaFinalI .'">' . $rSubMenuInterno3[$u]["titulo"] . '</a></li>';
+                                    $menuNav .= '<li><a href="' . $rotaFinalI .'">' . $rSubMenuInterno3[$u]["titulo"] . '</a></li>'."\n";
                                 }
-                            $menuNav .= '</ul>';
-                         $menuNav .= '</li>';
+                            $menuNav .= '</ul>'."\n";
+                            $menuNav .= '</li>'."\n";
                          }
                     }
             }
-                $menuNav .= '</ul>';
-                $menuNav .= '</li>';
+                $menuNav .= '</ul>'."\n";
+                $menuNav .= '</li>'."\n";
         }
-            $menuNav .= '</ul>';
-            $menuNav .= '</li>';
+            $menuNav .= '</ul>'."\n";
+            $menuNav .= '</li>'."\n";
     }
 //fim do menu departamentos
 
-        $menuNav .= '</ul>';
-        $menuNav .= '</div>';
-        $menuNav .= '</div>';
-        $menuNav .= '</div>';
+        $menuNav .= '</ul>'."\n";
+        $menuNav .= '</div>'."\n";
+        $menuNav .= '</div>'."\n";
         $menuNav .= '</div>';
 
         /**
