@@ -3,9 +3,7 @@ body {
     margin: 0;
     padding: 0;
 }
-header, nav, section, article, aside, footer {
-	display: block;
-}
+
 #wrapper {
 	width: 100%;
 	min-width: 100%;
@@ -32,7 +30,7 @@ background: linear-gradient(to bottom,  #c40016 0%,#bc0000 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c40016', endColorstr='#bc0000',GradientType=0 ); /* IE6-9 */
 
 
-height: 110px;
+min-height: 110px;
 padding: 0 0 0 0;
 }
 
@@ -108,4 +106,5 @@ border: 1px solid #aa0306;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf0707', endColorstr='#bf0707', GradientType=0);
 }
+
 
