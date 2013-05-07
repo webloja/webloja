@@ -1,0 +1,48 @@
+chamados:
+    resource: "@ChamadosBundle/Resources/config/routing.yml"
+    prefix:   /
+
+grl:
+    resource: "@GRLBundle/Resources/config/routing.yml"
+    prefix:   /
+
+seng:
+    resource: "@SENGBundle/Resources/config/routing.yml"
+    prefix:   /
+
+dcm:
+    resource: "@DCMBundle/Resources/config/routing.yml"
+    prefix:   /
+
+merchen:
+    resource: "@MerchenBundle/Resources/config/routing.yml"
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+mkt:
+    resource: "@MKTBundle/Resources/config/routing.yml"
+    prefix:   /
+
+dfi:
+    resource: "@DFIBundle/Resources/config/routing.yml"
+    prefix:   /
+
+dcp:
+    resource: "@DCPBundle/Resources/config/routing.yml"
+    prefix:   /
+
+da:
+    resource: "@DABundle/Resources/config/routing.yml"
+    prefix:   /
+
+dol:
+    resource: "@DOLBundle/Resources/config/routing.yml"
+    prefix:   /
+
+webloja:
+    resource: "@WeblojaBundle/Resources/config/routing.yml"
+    prefix:   /
+    

@@ -9,3 +9,9 @@ principal:
 logout:
     pattern:  /logout
     defaults: { _controller: WeblojaBundle:Home:logout }
+    
+root:
+    path:   /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route:    principal
