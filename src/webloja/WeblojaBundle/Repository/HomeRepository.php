@@ -54,7 +54,7 @@ class HomeRepository {
         return $conn->fetchAll("SELECT arquivo FROM lasasap.mkt_banners 
             WHERE (ativo = '1' AND (curdate() <= validade OR validade IS NULL) AND setor = $setor)");
     }
-
+    
 }
 
 ?>
