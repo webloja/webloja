@@ -3,7 +3,6 @@
 namespace webloja\WeblojaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Perfil
@@ -14,16 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Perfil
 {
-   /*
-    * @ORM\OneToMany(targetEntity="Usuario", mappedBy="perfil")
-    * 
-    */
-    protected $usuario;
-
-    public function __construct()
-    {
-        $this->usuario = new ArrayCollection();
-    }
 
     /**
      * @var integer
