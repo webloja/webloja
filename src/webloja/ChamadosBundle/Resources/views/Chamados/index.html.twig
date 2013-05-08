@@ -1,0 +1,96 @@
+{% extends "::webloja.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+<script>
+$(function() {
+
+    /**
+     * Desabilita o botão de envio ao entrar na tela  
+     **/
+    $("#btnEnviarLink").attr("disabled", true);
+
+    /**
+     * Dispara uma consulta ajax para carregar o dropdown modulo
+     **/
+    $("#addLinkOcorrencia_descricao").change(function() {
+
+        var id = $(this).val();
+        $('#addLinkOcorrencia_modulo').html("<option>carregando...</option>");
+        $.ajax({
+            type: 'POST',
+            url: '{{ path("select_modulos") }}',
+            data: {processo_id: id},
+            success: function(data) {
+                $('#addLinkOcorrencia_modulo').html(data);
+                $('#addLinkOcorrencia_link').html("<option>Selecione</option>");
+            }
+        });
+    })
+
+    /**
+     * Dispara uma consulta ajax para carregar o dropdown link
+     **/
+    $("#addLinkOcorrencia_modulo").change(function() {
+
+        var id = $(this).val();
+        $('#addLinkOcorrencia_link').html("<option>carregando...</option>");
+        $.ajax({
+            type: 'POST',
+            url: '{{ path("select_links") }}',
+            data: {modulo_id: id},
+            success: function(data) {
+                $('#addLinkOcorrencia_link').html(data);
+            }
+        });
+    })
+
+    /**
+     * Abilita o botão de envio caso exista valor no dropdown link  
+     **/
+    $("#addLinkOcorrencia_link").change(function() {
+        if ($(this).val() != "") {
+            $("#btnEnviarLink").removeAttr("disabled");
+        } else {
+            $("#btnEnviarLink").attr("disabled", true);
+        }
+    })
+
+});
+</script>
+{% endblock %}
+{% block body %}
+    <body >
+        <div class='row-fluid'>
+            <span class='span3'></span>
+            <div class='well well-small span6'>
+                    <form class="form-horizontal" action="{{ path('OcorrenciaNovo') }}" method="post" {{ form_enctype(form) }}>
+                    {{ form_errors(form) }}
+                            <div class="control-group">
+                            {{ form_label(form.descricao,'Processo',{'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                            {{ form_widget(form.descricao,{ 'attr': {'class': 'span8'} }) }}
+                            </div>
+                            </div>
+                            <div class="control-group">
+                            {{ form_label(form.modulo,'Modulo',{'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                            {{ form_widget(form.modulo,{ 'attr': {'class': 'span8'} }) }}
+                            </div>
+                            </div>
+                            <div class="control-group">
+                            {{ form_label(form.link,'Link',{'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                            {{ form_widget(form.link,{ 'attr': {'class': 'span8'} }) }}
+                            </div>
+                            </div>
+                           
+                            <div class='text-center'>
+                            <button type="submit" class="btn btn-small btn-danger" id='btnEnviarLink'>Enviar</button>
+                            </div>
+                    {{ form_rest(form) }}
+                    </form>
+             </div>
+             <span class='span3'></span>
+         </div>
+</body>
+{% endblock %}

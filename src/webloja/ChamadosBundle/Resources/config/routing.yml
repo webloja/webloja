@@ -2,6 +2,14 @@ Ocorrencia:
     pattern:  /Ocorrencia/{id_interno}
     defaults: { _controller: ChamadosBundle:Chamados:index }
     
+OcorrenciaNovo:
+    pattern:  /Ocorrencia/Novo/
+    defaults: { _controller: ChamadosBundle:Chamados:novo }
+    
+OcorrenciaListar:
+    pattern:  /Ocorrencia/Listar/{id_interno}
+    defaults: { _controller: ChamadosBundle:Chamados:listar }
+    
 select_modulos:
     pattern:  /Modulos
     defaults: { _controller: ChamadosBundle:Chamados:modulo }
