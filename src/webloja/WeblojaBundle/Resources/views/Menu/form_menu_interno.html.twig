@@ -1,0 +1,92 @@
+{% extends 'webloja.html.twig' %}
+
+{% block title %} Criar Menu Interno - WebLoja! {% endblock %}
+
+{% block body %} 
+<div class="row-fluid"> 
+    <div class="span3"></div>
+    <div class='span6'>
+        <div class="well well-small">
+            <form class="form-horizontal" action="webloja" method="post" {#{{ form_enctype(form) }} #}>       
+                <div class="control-group">
+                    <div class="controls text-center">
+                        <label class="control-label"><strong>&Aacute;rea Restrita</strong></label>
+                    </div>
+                </div>
+                {# {{ form_errors(form) }} #}
+                <hr />
+
+                <div class="control-group">
+                    <label for="">Titulo</label>
+
+                    <div class="controls">
+                         <input type="text" class="input-xlarge" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="">Ordem</label>
+
+                    <div class="controls">
+                        <input type="number" class="input-large" />
+                    </div>
+                </div>
+
+                 <div class="control-group">
+                    <label for="">Permissão</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-large" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="">Rota</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-large" />
+                    </div>
+                </div>
+
+                 <div class="control-group">
+                    <label for="" class="control-label">Menu</label>
+
+                    <div class="controls">
+                        <select>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="">Menu pai</label>
+
+                    <div class="controls">
+                        <select>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                      <label class="checkbox">
+                          <input type="radio" value="1" name="chkStatus" checked="checked" />Ativo
+                          <input type="radio" value="0" name="chkStatus" />Inativo
+                      </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-error">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+        
+    </div>
+    
+    <div class='span3'></div>
+</div>
+
+{% endblock %}

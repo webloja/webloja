@@ -9,3 +9,6 @@ select_modulos:
 select_links:
     pattern:  /Links
     defaults: { _controller: ChamadosBundle:Chamados:link }
+
+OcorrenciaListar:
+    pattern:  /    

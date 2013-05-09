@@ -15,3 +15,7 @@ root:
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route:    principal
+
+webloja_menu_interno:
+    pattern:  /menu/principal/criar
+    defaults: { _controller: WeblojaBundle:Menu:criarMenuInterno }

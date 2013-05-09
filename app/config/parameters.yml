@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     52.31.153.101
-    database_port:     3308
-    database_name:     lasasap
-    database_user:     fmello
-    database_password: fmello
+    database_host:     
+    database_port:     
+    database_name:     
+    database_user:     
+    database_password: 
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
