@@ -15,12 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Usuario{
 
-   /**
-     * @ORM\ManyToOne(targetEntity="Perfil")
-     * @ORM\JoinColumn(name="id_perfil", referencedColumnName="id_perfil")
-     */
-    protected $perfil; 
-    
     /**
      * @var integer
      *
@@ -34,7 +28,7 @@ class Usuario{
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=15)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Informe o login!")
      * @Assert\Length(
      *      min = "3",
      *      minMessage = "O campo Login tem que ter no mínimo  {{ limit }} caracters")
@@ -45,12 +39,13 @@ class Usuario{
      * @var string
      *
      * @ORM\Column(name="senha", type="string", length=45)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Informe a senha!")
      * @Assert\Length(
      *      min = "3",
      *      minMessage = "O campo Senha tem que ter no mínimo  {{ limit }} caracters")
      */
     private $senha;
+    
 
     /**
      * @var string
@@ -68,6 +63,7 @@ class Usuario{
     /**
      * @var string
      * @ORM\Column(name="nome", type="string", length=100)
+     * 
      */
     private $nome;
 
@@ -84,6 +80,10 @@ class Usuario{
      * @ORM\Column(name="ativo", type="integer")
      */
     private $ativo;
+    
+    
+    
+    private $confirmeSenha;
 
 
     /**
@@ -91,8 +91,7 @@ class Usuario{
      *
      * @return integer 
      */
-     public function setId($id)
-    {
+    public function setId($id){
         $this->id = $id;
     
         return $this;
@@ -263,17 +262,28 @@ class Usuario{
     {
         return $this->ativo;
     }
-    
-    public function setPerfil($perfil)
+   
+    /**
+     * Set senha
+     *
+     * @param string $senha
+     * @return Usuario
+     */
+    public function setConfirmeSenha($senha)
     {
-        $this->perfil = $perfil;
+        $this->confirmeSenha = $senha;
     
         return $this;
     }
-    
-     public function getPerfil()
+
+    /**
+     * Get senha
+     *
+     * @return string 
+     */
+    public function getConfirmeSenha()
     {
-        return $this->perfil;
+        return $this->confirmeSenha;
     }
     
 

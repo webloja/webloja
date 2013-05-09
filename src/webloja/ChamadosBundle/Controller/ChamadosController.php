@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use webloja\ChamadosBundle\Form\Type\AddLinkOcorrenciaType;
 use webloja\WeblojaBundle\Repository\MenuRepository;
 
-class ChamadosController extends Controller {
+class ChamadosController extends Controller { 
 
-    public function indexAction($id_interno) {
+    public function indexAction($id_interno=null) {
         
         /**
          * codigo referente ao controle de sessão da pagina
@@ -24,14 +24,14 @@ class ChamadosController extends Controller {
         /*******************************************************/
         
         /**
-         * Condigo referente ao titulo de cada pagina
+         * Condigo referente a montagem do título da pagina
+         * precisa ser colocado em toda página que gera formulário
+         * ou que tenha saída para template
          */
-        $this->conn = $this->get('database_connection');
-        $rMenuInterno = MenuRepository::getIdInterno($id_interno,$this->conn);
-        $session->set('id_interno', $rMenuInterno[0]['id_interno']);
-        $session->set('menu', $rMenuInterno[0]['menu']);
-        $session->set('titulo', $rMenuInterno[0]['titulo']);
-        /********************************************************/
+        if($id_interno!=null){
+             $this->conn = $this->get('database_connection');
+             MenuRepository::getIdInterno($id_interno,$this->conn,$session);
+        }
         
         $form = $this->createForm(new AddLinkOcorrenciaType());
 
@@ -44,6 +44,7 @@ class ChamadosController extends Controller {
                 try {
 
                     $form->getData();
+                    
                 } catch (\Exception $e) {
                     
                 }
@@ -92,6 +93,22 @@ class ChamadosController extends Controller {
 
         return $this->render("ChamadosBundle:Chamados:optionLink.html.twig", array(
                     'links' => $links));
+    }
+    
+    public function novoAction(){
+        
+         return $this->render("ChamadosBundle:Chamados:chamadoNovo.html.twig",array(
+                    'link' => $_POST['addLinkOcorrencia']['link']));
+    }
+    
+     public function listarAction($id_interno=null){
+        
+         $session = $this->getRequest()->getSession();
+         if($id_interno!=null){
+             $this->conn = $this->get('database_connection');
+             MenuRepository::getIdInterno($id_interno,$this->conn,$session);
+         }
+         return $this->render("ChamadosBundle:Chamados:chamadoListar.html.twig");
     }
 
 }

@@ -11,7 +11,7 @@ class AddLinkOcorrenciaType extends AbstractType{
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
-        $builder->add("processo",'entity',array('class'=>'ChamadosBundle:AberturaChamadoProcesso',
+        $builder->add("descricao",'entity',array('class'=>'ChamadosBundle:AberturaChamadoProcesso',
             'property'=>'descricao',
             'empty_value'=>'Selecione',
             'required'=>false,
