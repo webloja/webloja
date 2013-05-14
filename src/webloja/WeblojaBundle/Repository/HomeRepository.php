@@ -1,12 +1,13 @@
 <?php
 
 namespace webloja\WeblojaBundle\Repository;
+use webloja\LIB\DBALConnection;
 
 class HomeRepository {
 
-    public function getMarketing($loja, $conn) {
+    public function getMarketing($loja) {
 
-        return $conn->fetchAll("SELECT ntf.id_segmento, ntf.id, ntf.titulo, ntf.mensagem, 
+        return DBALConnection::getDBALConection()->fetchAll("SELECT ntf.id_segmento, ntf.id, ntf.titulo, ntf.mensagem, 
             ntf.todas_lojas, ntf.destaque, pt.id_marketing FROM lasasap.mkt_notificacoes ntf 
             LEFT JOIN lasasap.notificacao_local lc ON lc.id_notificacao = ntf.id_notificacao 
             LEFT JOIN lasasap.papeletas p ON p.id_papeleta = ntf.id 
@@ -17,9 +18,9 @@ class HomeRepository {
                     GROUP BY ntf.id ORDER BY ntf.id_notificacao DESC LIMIT 0, 7");
     }
 
-    public function getMerchandising($loja, $conn) {
+    public function getMerchandising($loja) {
 
-        return $conn->fetchAll("SELECT ntf.id_segmento, ntf.id, ntf.titulo, ntf.mensagem, 
+        return DBALConnection::getDBALConection()->fetchAll("SELECT ntf.id_segmento, ntf.id, ntf.titulo, ntf.mensagem, 
             ntf.todas_lojas, ntf.destaque, pt.id_marketing FROM lasasap.mkt_notificacoes ntf 
             LEFT JOIN lasasap.notificacao_local lc ON lc.id_notificacao = ntf.id_notificacao 
             LEFT JOIN lasasap.papeletas p ON p.id_papeleta = ntf.id 
@@ -29,9 +30,9 @@ class HomeRepository {
             GROUP BY ntf.id ORDER BY ntf.id_notificacao DESC LIMIT 0, 4");
     }
 
-    public function getNoticiaDol($loja, $conn) {
+    public function getNoticiaDol($loja) {
 
-        return $conn->fetchAll("SELECT nt.id_notificacao, nt.titulo, nt.mensagem, nt.id_aplicacao, nt.data, 
+        return DBALConnection::getDBALConection()->fetchAll("SELECT nt.id_notificacao, nt.titulo, nt.mensagem, nt.id_aplicacao, nt.data, 
             nt.segmento, lc.local FROM lasasap.notificacao nt 
             JOIN lasasap.notificacao_local lc ON lc.id_notificacao = nt.id_notificacao 
             WHERE (DATE_FORMAT(ADDDATE(nt.data, INTERVAL '31' DAY), '%Y-%m-%d') >= curdate() 
@@ -39,9 +40,9 @@ class HomeRepository {
             GROUP BY id_notificacao ORDER BY data DESC LIMIT 6");
     }
 
-    public function getNotificacaoGeral($loja, $conn) {
+    public function getNotificacaoGeral($loja) {
 
-        return $conn->fetchAll("SELECT nt.id_notificacao, nt.titulo, nt.mensagem, nt.id_aplicacao, nt.data, 
+        return DBALConnection::getDBALConection()->fetchAll("SELECT nt.id_notificacao, nt.titulo, nt.mensagem, nt.id_aplicacao, nt.data, 
             nt.segmento, lc.local FROM lasasap.notificacao nt 
             JOIN lasasap.notificacao_local lc ON lc.id_notificacao = nt.id_notificacao 
             WHERE (DATE_FORMAT(ADDDATE(nt.data, INTERVAL '31' DAY), '%Y-%m-%d') >= curdate() 
@@ -49,9 +50,9 @@ class HomeRepository {
             GROUP BY id_notificacao ORDER BY data DESC LIMIT 6");
     }
 
-    public function getBanner($conn, $setor) {
+    public function getBanner($setor) {
 
-        return $conn->fetchAll("SELECT arquivo FROM lasasap.mkt_banners 
+        return DBALConnection::getDBALConection()->fetchAll("SELECT arquivo FROM lasasap.mkt_banners 
             WHERE (ativo = '1' AND (curdate() <= validade OR validade IS NULL) AND setor = $setor)");
     }
     
