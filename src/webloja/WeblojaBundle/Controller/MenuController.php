@@ -54,4 +54,9 @@ class MenuController extends Controller
         MenuRepository::geraMenuHtml($id_perfil, $this->conn);
         
     }
+    
+    public function criarMenuInternoAction()
+    {
+        return $this->render('WeblojaBundle:Menu:form_menu_interno.html.twig');
+    }
 }

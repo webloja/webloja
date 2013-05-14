@@ -133,12 +133,31 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/hello')) {
-            // chamados_homepage
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'chamados_homepage')), array (  '_controller' => 'webloja\\ChamadosBundle\\Controller\\DefaultController::indexAction',));
+        // Ocorrencia
+        if (0 === strpos($pathinfo, '/Ocorrencia') && preg_match('#^/Ocorrencia/(?P<id_interno>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'Ocorrencia')), array (  '_controller' => 'webloja\\ChamadosBundle\\Controller\\ChamadosController::indexAction',));
+        }
+
+        // select_modulos
+        if ($pathinfo === '/Modulos') {
+            return array (  '_controller' => 'webloja\\ChamadosBundle\\Controller\\ChamadosController::moduloAction',  '_route' => 'select_modulos',);
+        }
+
+        // select_links
+        if ($pathinfo === '/Links') {
+            return array (  '_controller' => 'webloja\\ChamadosBundle\\Controller\\ChamadosController::linkAction',  '_route' => 'select_links',);
+        }
+
+        // OcorrenciaListar
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'OcorrenciaListar');
             }
 
+            return array('_route' => 'OcorrenciaListar');
+        }
+
+        if (0 === strpos($pathinfo, '/hello')) {
             // grl_homepage
             if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'grl_homepage')), array (  '_controller' => 'GrlBundle:Default:index',));
@@ -204,6 +223,20 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // logout
         if ($pathinfo === '/logout') {
             return array (  '_controller' => 'webloja\\WeblojaBundle\\Controller\\HomeController::logoutAction',  '_route' => 'logout',);
+        }
+
+        // root
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'root');
+            }
+
+            return array (  '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::redirectAction',  'route' => 'principal',  '_route' => 'root',);
+        }
+
+        // webloja_menu_interno
+        if ($pathinfo === '/menu/principal/criar') {
+            return array (  '_controller' => 'webloja\\WeblojaBundle\\Controller\\MenuController::criarMenuInternoAction',  '_route' => 'webloja_menu_interno',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

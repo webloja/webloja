@@ -283,14 +283,13 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_517817324a8d6.php';
+        require_once 'C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_518957175ea87.php';
 
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_2c9e14a0c713e82bce2c0891851ba437');
+        $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_2c9e14a0c713e82bce2c0891851ba437');
@@ -298,26 +297,32 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_2c9e14a0c713e82bce2c0891851ba437');
 
-        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'C:\\wamp\\www\\webloja\\src\\webloja\\WeblojaBundle\\Entity')), 'webloja\\WeblojaBundle\\Entity');
+        $d = new \Doctrine\Common\Cache\ArrayCache();
+        $d->setNamespace('sf2orm_default_2c9e14a0c713e82bce2c0891851ba437');
 
-        $e = new \Doctrine\ORM\Configuration();
-        $e->setEntityNamespaces(array('WeblojaBundle' => 'webloja\\WeblojaBundle\\Entity'));
-        $e->setMetadataCacheImpl($a);
-        $e->setQueryCacheImpl($b);
-        $e->setResultCacheImpl($c);
-        $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('C:/wamp/www/webloja/app/cache/dev/doctrine/orm/Proxies');
-        $e->setProxyNamespace('Proxies');
-        $e->setAutoGenerateProxyClasses(true);
-        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => 'C:\\wamp\\www\\webloja\\src\\webloja\\WeblojaBundle\\Entity', 1 => 'C:\\wamp\\www\\webloja\\src\\webloja\\ChamadosBundle\\Entity'));
 
-        $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
-        $this->get('doctrine.orm.default_manager_configurator')->configure($f);
+        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $f->addDriver($e, 'webloja\\WeblojaBundle\\Entity');
+        $f->addDriver($e, 'webloja\\ChamadosBundle\\Entity');
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        $g = new \Doctrine\ORM\Configuration();
+        $g->setEntityNamespaces(array('WeblojaBundle' => 'webloja\\WeblojaBundle\\Entity', 'ChamadosBundle' => 'webloja\\ChamadosBundle\\Entity'));
+        $g->setMetadataCacheImpl($b);
+        $g->setQueryCacheImpl($c);
+        $g->setResultCacheImpl($d);
+        $g->setMetadataDriverImpl($f);
+        $g->setProxyDir('C:/wamp/www/webloja/app/cache/dev/doctrine/orm/Proxies');
+        $g->setProxyNamespace('Proxies');
+        $g->setAutoGenerateProxyClasses(true);
+        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+
+        $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
+        $this->get('doctrine.orm.default_manager_configurator')->configure($h);
+
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
     }
 
     /**
@@ -2835,7 +2840,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3690,8 +3695,8 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_517817324a8d6.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_518957175ea87.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

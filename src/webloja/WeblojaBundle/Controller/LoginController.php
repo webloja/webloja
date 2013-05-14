@@ -88,7 +88,7 @@ class LoginController extends Controller
                     
                 } catch (\Exception $e) {
                     $session->clear();
-                    $this->get('session')->getFlashBag()->add('notice', "Usuário ou senha inválido!");
+                    $this->get('session')->getFlashBag()->add('notice', $e->getMessage());
                     return $this->redirect($this->generateUrl('login'));
                 }
             }

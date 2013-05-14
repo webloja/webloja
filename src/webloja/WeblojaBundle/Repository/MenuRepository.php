@@ -174,8 +174,10 @@ class MenuRepository {
          * Recuperando o DOCUMENT_ROOT do servidor e criando o arquivo de menu
          * baseado no perfil do usuario logado.
          */
-        $docRoot = $_SERVER['DOCUMENT_ROOT'];
-        file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        $docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
+        //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
+        //exit;
+        file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
     }
 
     public static function getIdInterno($id_interno, $session) {

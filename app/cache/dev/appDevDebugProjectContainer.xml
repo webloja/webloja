@@ -490,8 +490,8 @@
     <parameter key="jms_di_extra.disable_grep">false</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_517817324a8d6.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_518957175ea87.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -2257,8 +2257,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager517817324a8d6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_517817324a8d6.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager518957175ea87_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/webloja/app/cache/dev/jms_diextra/doctrine/EntityManager_518957175ea87.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2267,6 +2267,7 @@
               <call method="setEntityNamespaces">
                 <argument type="collection">
                   <argument key="WeblojaBundle">webloja\WeblojaBundle\Entity</argument>
+                  <argument key="ChamadosBundle">webloja\ChamadosBundle\Entity</argument>
                 </argument>
               </call>
               <call method="setMetadataCacheImpl">
@@ -2305,10 +2306,23 @@
                           <argument type="service" id="annotation_reader"/>
                           <argument type="collection">
                             <argument>C:\wamp\www\webloja\src\webloja\WeblojaBundle\Entity</argument>
+                            <argument>C:\wamp\www\webloja\src\webloja\ChamadosBundle\Entity</argument>
                           </argument>
                         </service>
                       </argument>
                       <argument>webloja\WeblojaBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>C:\wamp\www\webloja\src\webloja\WeblojaBundle\Entity</argument>
+                            <argument>C:\wamp\www\webloja\src\webloja\ChamadosBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>webloja\ChamadosBundle\Entity</argument>
                     </call>
                   </service>
                 </argument>
