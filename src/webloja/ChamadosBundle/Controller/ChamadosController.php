@@ -29,8 +29,8 @@ class ChamadosController extends Controller {
          * ou que tenha saída para template
          */
         if($id_interno!=null){
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno,$this->conn,$session);
+//             $this->conn = $this->get('database_connection');
+             MenuRepository::getIdInterno($id_interno,$session);
         }
         
         $form = $this->createForm(new AddLinkOcorrenciaType());
@@ -105,8 +105,8 @@ class ChamadosController extends Controller {
         
          $session = $this->getRequest()->getSession();
          if($id_interno!=null){
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno,$this->conn,$session);
+//             $this->conn = $this->get('database_connection');
+             MenuRepository::getIdInterno($id_interno,$session);
          }
          return $this->render("ChamadosBundle:Chamados:chamadoListar.html.twig");
     }
