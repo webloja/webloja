@@ -71,9 +71,7 @@ class LoginController extends Controller
                         }
                         
                         $session->set("boasVindas", $boasVindas);                  
-                    
-                        $conn = $this->get('database_connection');
-      
+                   
                         /**
                          * Criando o memu do sistema de acordo com o perfil do usuario
                          * logado.
@@ -84,7 +82,7 @@ class LoginController extends Controller
                             $cr = null;
                         }
                         
-                        MenuRepository::geraMenuHtml($login->getIdPerfil(),$conn,$cr);
+                        MenuRepository::geraMenuHtml($login->getIdPerfil(),$cr);
                         
                     return $this->redirect($this->generateUrl('principal'));
                     
