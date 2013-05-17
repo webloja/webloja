@@ -1,3 +1,15 @@
 AdminUsuarioNovo:
     pattern:  /Admin/Usuario/Novo/{id_interno}
     defaults: { _controller: AdminBundle:Admin:index }
+    
+AdminCFUserProntuario:
+    pattern:  /Admin/CF/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:newUserProntuario }
+    
+AdminVerificaProntuario:
+    pattern:  /Admin/Verifica/Prontuario
+    defaults: { _controller: AdminBundle:Admin:verificaProntuario }
+   
+AdminUpdateSenhaUsuario:
+    pattern:  /Admin/Update/Senha/Usuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:updateSenhaUsuario }
