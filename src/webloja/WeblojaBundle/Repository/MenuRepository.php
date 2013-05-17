@@ -13,10 +13,11 @@ class MenuRepository {
             FROM lasasap.menu_departamentos d 
             JOIN lasasap.menu m ON m.id_departamento = d.id_departamento 
             JOIN lasasap.menu_perfil p ON p.id_menu = m.id_menu 
-            WHERE p.id_perfil = :id_perfil 
+            WHERE p.id_perfil = :id_perfil AND d.ativo = :ativo
             GROUP BY d.id_departamento ORDER BY d.ordem ASC";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id_perfil",$id_perfil);
+        $stmt->bindValue("ativo",1);
         $stmt->execute();
         return $stmt->fetchAll();
         
@@ -35,11 +36,6 @@ class MenuRepository {
         $stmt->execute();
         return $stmt->fetchAll();
         
-//        return DBALConnection::getDBALConection()->fetchAll("SELECT m.id_menu, m.menu 
-//            FROM lasasap.menu m 
-//            JOIN lasasap.menu_perfil p ON p.id_menu = m.id_menu 
-//            WHERE (p.id_perfil = $id_perfil and m.ativo = 1 and m.id_departamento = $id_departamento ) 
-//            ORDER BY ordem ASC");
     }
 
     public static function getSubMenuInterno($id_menu, $perfil) {
@@ -57,8 +53,6 @@ class MenuRepository {
         $stmt->bindValue("ativo",1);
         $stmt->execute();
         return $stmt->fetchAll();
-//        return DBALConnection::getDBALConection()->fetchAll("SELECT id_interno, titulo, link, rota, pai  
-//            FROM lasasap.menu_interno WHERE (id_menu = $id_menu AND ativo = '1' and pai is null $wherePefil )");
     }
 
     public static function getSubMenuInternoNivel2($id_menu) {
@@ -73,12 +67,7 @@ class MenuRepository {
         $stmt->bindValue("ativo",1);
         $stmt->execute();
         return $stmt->fetchAll();
-//        return $conn->fetchAll("SELECT pai FROM lasasap.menu_interno WHERE id_menu = $id_menu AND ativo = '1'
-//and pai is not null group by pai");
-//        return DBALConnection::getDBALConection()->fetchAll("SELECT mi.pai,mi.id_menu,mi2.titulo FROM lasasap.menu_interno mi 
-//             inner join lasasap.menu_interno mi2 on mi2.id_interno=mi.pai 
-//             WHERE mi.id_menu = $id_menu AND mi.ativo = '1' 
-//             and mi.pai is not null group by mi.pai");
+
     }
 
     public static function getSubMenuInternoNivel3($id_pai) {
@@ -91,9 +80,7 @@ class MenuRepository {
         $stmt->bindValue("ativo",1);
         $stmt->execute();
         return $stmt->fetchAll();
-        
-//        return DBALConnection::getDBALConection()->fetchAll("SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
-//            WHERE pai = $id_pai AND ativo = '1'");
+
     }
 
     public static function geraMenuHtml($id_perfil, $cr) {
@@ -174,10 +161,13 @@ class MenuRepository {
          * Recuperando o DOCUMENT_ROOT do servidor e criando o arquivo de menu
          * baseado no perfil do usuario logado.
          */
-        $docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
+        //$docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
+        //file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
         //exit;
-        file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        $docRoot = $_SERVER['DOCUMENT_ROOT'];
+        file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        
     }
 
     public static function getIdInterno($id_interno, $session) {
