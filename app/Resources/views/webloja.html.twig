@@ -76,6 +76,11 @@
                                                             <li class='text-error'><strong>{{app.session.get('titulo')}}</strong></li>
                                                     </ul>
 {% endif %}
+{% for flashMessage in app.session.flashbag.get('debug_rfc') %}
+          {% if flashMessage is not empty %}
+          <pre class="well well-small" style='background: #f9ecec;'>{{ flashMessage }}</pre>
+          {% endif %}
+{% endfor %}
 {% block body %}{% endblock %}
                                                             </div>
                                                         </div>
