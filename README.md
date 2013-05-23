@@ -1,174 +1,111 @@
-Symfony Standard Edition
-========================
+DOCUMENTAÇÃO INICIAL DO WEBLOJA
+===============================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+** CAMADA VIEW
+--------------
+  - Esta sendo usado o Twitter-Bootstrap para desenhar as telas.
+  - Realizando integração com Twig do próprio Symfony 2.
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+** LOGIN DO SISTEMA
+-------------------
+  - Esta sendo o feito o mesmo que o webloja atual, com adaptações para integrar-se com o symfony.
 
-1) Installing the Standard Edition
-----------------------------------
+** ORGANIZAÇÃO DO SISTEMA
+--------------------------
+ - O sistema esta organizado em Bundles, onde cada Departamento que intitula um menu principal forma um Bundle, possuindo também um Bundle geral onde são colocados os programas e códigos que são usados por todos os outros Bundles.
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+** BUNDLES
+----------
+  - AdminBundle: Aqui são colocados os programas ´referentes a parte administrativa do sistema webloja.
+  - ChamadosBundle: Programas do modulo de apertura de chamados.
+  - DABundle: Programas usados pelo departamento DA.
+  - DCM: Programas usados pelo departamento DCM.
+  - DCP: Programas usados pelo departamento DCP.
+  - DFI: Programas usados pelo departamento DFI.
+  - DOL: Programas usados pelo departamento DOL.
+  - GRL: Programas usados pelo departamento GRL.
+  - LIB: Programas usados por todos os Bundles, bibliotecas e ultilitarios.
+  - Merchan: Programas usados pelo departamento Merchan.
+  - MKT: Programas usados pelo departamento de Marketing.
+  - SENG: Programas usados pelo departamento SENG.
+  - Webloja: Controllers,Views,Formularios,Repository que serão usados por todos os Bundles.
 
-### Use Composer (*recommended*)
+** LIB
+------
+  - DBALConnection.php: Biblioteda de conexão com banco de dados, para uso no sistema, nos casos em que não é possível usar a conexão nativa do sistema.(esta biblioteca tambem usa a conexão doctrine).
 
-As Symfony uses [Composer][2] to manage its dependencies, the recommended way
-to create a new project is to use it.
+  - Arquivo producao.ini: contem a configuração de conexão com o SAP (como é feito no sistema atual).
 
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+  - TRfc.php: biblioteca adaptada ao uso do symfony 2, com a adaptação não se é mais necessário criar arquivos rfc para o sistema, a biblioteca é usada diretamente dentro da action do controller.
 
-    curl -s http://getcomposer.org/installer | php
+** CÓDIGO OBRIGATÓRIO NAS ACTION QUE ACESSAM TEMPLATES
 
-Then, use the `create-project` command to generate a new Symfony application:
+          /**
+         * codigo referente ao controle de sessão da pagina
+         * este código deve ser colocado em todos os controllers
+         * nos metodos que reenderizam formulários
+         */
+        $session = $this->getRequest()->getSession();
+        if(!$session->get('id_user')){
+            
+             $this->get('session')->getFlashBag()->add('notice', "Efetue o login para entrar no sistema!");
+             return $this->redirect($this->generateUrl('logout'));
+        }
+        /*******************************************************/
+        
+        /**
+         * Condigo referente a montagem do título da pagina
+         * precisa ser colocado em toda página que gera formulário
+         * ou que tenha saída para template
+         */
+        if($id_interno!=null){
+             MenuRepository::getIdInterno($id_interno,$session);
+        }
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+** ALERTAS JQUERY
+==========
+código js
+==========
+$(document).ready(function() {
 
-Composer will install Symfony and all its dependencies under the
-`path/to/install` directory.
+    $("#dialog").dialog({
+        autoOpen: false,
+        width: 400,
+        buttons: [
+            {
+                text: "Ok",
+                click: function() {
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
 
-### Download an Archive File
+    $("#componente").click(function(event) {
+       event.preventDefault();
+       ....
+            $("#dialog").dialog("open").html('<br /> Texto que vai aparecer no alert!');        
+    });
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
-Edition and unpack it somewhere under your web server root directory.
+});
 
-If you downloaded an archive "without vendors", you also need to install all
-the necessary dependencies. Download composer (see above) and run the
-following command:
+=====================
+código na pagina html
+=====================
+ <div id="dialog" title="Erro"></div>
 
-    php composer.phar install
+** FORMATAÇÃO DOS CAMPOS DATA COM ALENDÁRIO
 
-2) Checking your System Configuration
--------------------------------------
+ - adcionar o codigo na área de java script da pagina
 
-Before starting coding, make sure that your local system is properly
-configured for Symfony.
+<script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap-datetimepicker.min.js') }}"></script>
 
-Execute the `check.php` script from the command line:
+ - configuração na página js
 
-    php app/check.php
+ $('#data_dia').datetimepicker({
+        pickTime: false,
+        maskInput: true
+});
 
-Access the `config.php` script from a browser:
-
-    http://localhost/path/to/symfony/app/web/config.php
-
-If you get any warnings or recommendations, fix them before moving on.
-
-3) Browsing the Demo Application
---------------------------------
-
-Congratulations! You're now ready to use Symfony.
-
-From the `config.php` page, click the "Bypass configuration and go to the
-Welcome page" link to load up your first Symfony page.
-
-You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the `config.php` page.
-
-To see a real-live Symfony page in action, access the following page:
-
-    web/app_dev.php/demo/hello/Fabien
-
-4) Getting started with Symfony
--------------------------------
-
-This distribution is meant to be the starting point for your Symfony
-applications, but it also contains some sample code that you can learn from
-and play with.
-
-A great way to start learning Symfony is via the [Quick Tour][4], which will
-take you through all the basic features of Symfony2.
-
-Once you're feeling good, you can move onto reading the official
-[Symfony2 book][5].
-
-A default bundle, `AcmeDemoBundle`, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
-
-  * delete the `src/Acme` directory;
-
-  * remove the routing entries referencing AcmeBundle in
-    `app/config/routing_dev.yml`;
-
-  * remove the AcmeBundle from the registered bundles in `app/AppKernel.php`;
-
-  * remove the `web/bundles/acmedemo` directory;
-
-  * remove the `security.providers`, `security.firewalls.login` and
-    `security.firewalls.secured_area` entries in the `security.yml` file or
-    tweak the security configuration to fit your needs.
-
-What's inside?
----------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * Twig is the only configured template engine;
-
-  * Doctrine ORM/DBAL is configured;
-
-  * Swiftmailer is configured;
-
-  * Annotations for everything are enabled.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * [**JMSSecurityExtraBundle**][13] - Allows security to be added via
-    annotations
-
-  * [**JMSDiExtraBundle**][14] - Adds more powerful dependency injection
-    features
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][15] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
-    code
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.1/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://symfony.com/download
-[4]:  http://symfony.com/doc/2.1/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.1/index.html
-[6]:  http://symfony.com/doc/2.1/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.1/book/doctrine.html
-[8]:  http://symfony.com/doc/2.1/book/templating.html
-[9]:  http://symfony.com/doc/2.1/book/security.html
-[10]: http://symfony.com/doc/2.1/cookbook/email.html
-[11]: http://symfony.com/doc/2.1/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.1/cookbook/assetic/asset_management.html
-[13]: http://jmsyst.com/bundles/JMSSecurityExtraBundle/master
-[14]: http://jmsyst.com/bundles/JMSDiExtraBundle/master
-[15]: http://symfony.com/doc/2.1/bundles/SensioGeneratorBundle/index.html
+ - para outras configurações acessar o site: http://tarruda.github.io/bootstrap-datetimepicker/
+ OBS: o plugin já foi modificado para mostrar dados em portugues Brasil.
