@@ -1,4 +1,4 @@
-Symfony Standard Edition teste de comit teste 2
+Symfony Standard Edition
 ========================
 
 Welcome to the Symfony Standard Edition - a fully-functional Symfony2
