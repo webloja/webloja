@@ -29,7 +29,6 @@ class ChamadosController extends Controller {
          * ou que tenha saída para template
          */
         if($id_interno!=null){
-//             $this->conn = $this->get('database_connection');
              MenuRepository::getIdInterno($id_interno,$session);
         }
         
