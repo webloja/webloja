@@ -3,6 +3,7 @@
 namespace webloja\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * CFUsuario
@@ -32,6 +33,7 @@ class CFUsuario
      * @var integer
      *
      * @ORM\Column(name="prontuario", type="integer")
+     * @Assert\NotBlank(message="Favor informar o prontuário")
      */
     private $prontuario;
 
@@ -39,6 +41,7 @@ class CFUsuario
      * @var string
      *
      * @ORM\Column(name="senha", type="string", length=20)
+     * @Assert\NotBlank(message="Favor informar a Senha")
      */
     private $senha;
     

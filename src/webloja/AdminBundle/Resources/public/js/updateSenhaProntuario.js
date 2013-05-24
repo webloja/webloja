@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#dialog").dialog({
+     $("#dialog").dialog({
             autoOpen: false,
             width: 400,
             buttons: [
@@ -13,18 +13,39 @@ $(document).ready(function() {
             ]
         });
 
-        $("#btnUpdateUsuario").click(function(event) {
+        $("#btnUpdateSenhaProntuario").click(function(event) {
+
             event.preventDefault();
-            if($("#updateSenhaUser_senha").val() == ""){
-                $("#dialog").dialog("open").html('<br />* Informe sua senha atual !');
-            }else if($("#updateSenhaUser_senhaNova").val() == ""){
-                $("#dialog").dialog("open").html('<br />* Informe a nova senha !');
-            }else if($("#updateSenhaUser_confirmeSenha").val() == ""){
-                $("#dialog").dialog("open").html('<br />* Confirme a senha !');
-            }else if($("#updateSenhaUser_confirmeSenha").val() != $("#updateSenhaUser_senhaNova").val()){
-                $("#dialog").dialog("open").html('<br />* Os campos Nova Senha e Confirme Nova Senha não estão iguais !');
-            }else{
-                $("#FormUpdateSenhaUser").submit();
+
+            reDigits = /^\d+$/;
+
+            if (!reDigits.test($('#updateCFUserProntuario_prontuario').val()) || $('#updateCFUserProntuario_prontuario').val()=="") {
+                $('#updateCFUserProntuario_prontuario').val("");
+                $("#dialog").dialog("open").html('<br />* O campo prontuário só aceita números e não pode ser vazio!');
+            }else if($('#updateCFUserProntuario_senha').val()==""){
+                $("#dialog").dialog("open").html('<br />* Preencha o campo Senha Atual!');
+            }else if($('#updateCFUserProntuario_senhaNova').val()==""){
+                $("#dialog").dialog("open").html('<br />* Preencha o campo Nova Senha!');
+            }else if($('#updateCFUserProntuario_confirmeSenha').val()==""){
+                $("#dialog").dialog("open").html('<br />* Preencha o campo Confirme a Nova Senha!');
+            }else if($('#updateCFUserProntuario_senhaNova').val()!=$('#updateCFUserProntuario_confirmeSenha').val()){
+                $("#dialog").dialog("open").html('<br />* Os campos Nova Senha e Confirme Nova Senha não podem ser diferentes!');
+            }else {
+                $("#FormUpdateSenhaProntuario").submit();
+            }
+        });
+        
+        $("#btnResetSenhaProntuario").click(function(event) {
+
+            event.preventDefault();
+
+            reDigits = /^\d+$/;
+
+            if (!reDigits.test($('#resetSenhaProntuario_prontuario').val()) || $('#resetSenhaProntuario_prontuario').val()=="") {
+                $('#resetSenhaProntuario_prontuario').val("");
+                $("#dialog").dialog("open").html('<br />* O campo prontuário só aceita números e não pode ser vazio!');
+            }else {
+                $("#FormResetSenhaProntuario").submit();
             }
         });
 

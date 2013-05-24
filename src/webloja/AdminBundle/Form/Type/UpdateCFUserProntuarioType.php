@@ -6,19 +6,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AddCFUserProntuarioType extends AbstractType {
+class UpdateCFUserProntuarioType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $builder->add('prontuario', 'integer');
-        $builder->add('nome', 'text',array('mapped'=>false));
-        $builder->add('loja', 'hidden');
         $builder->add('senha', 'password');
+        $builder->add('senhaNova', 'password',array('mapped' => false));
         $builder->add('confirmeSenha', 'password',array('mapped' => false));
     }
 
     public function getName() {
-        return 'addCFUserProntuario';
+        return 'updateCFUserProntuario';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

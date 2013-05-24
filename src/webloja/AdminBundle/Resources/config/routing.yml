@@ -13,3 +13,24 @@ AdminVerificaProntuario:
 AdminUpdateSenhaUsuario:
     pattern:  /Admin/Update/Senha/Usuario/{id_interno}
     defaults: { _controller: AdminBundle:Admin:updateSenhaUsuario }
+
+AdminUpdateSenhaProntuario:
+    pattern:  /Admin/Update/Senha/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:updateUserProntuario }
+    
+AdminVerificaSenhaProntuario:
+    pattern:  /Admin/Verifica/Senha/Prontuario
+    defaults: { _controller: AdminBundle:Admin:verificaSenhaProntuario }
+    
+ResetSenhaProntuario:
+    pattern:  /Admin/Reset/Senha/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:resetSenhaProntuario }
+    
+UpdateLojaProntuario:
+    pattern:  /Admin/Update/Loja/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:updateLojaProntuario }
+    
+NovaLojaProntuario:
+    pattern:  /Admin/Nova/Loja/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:novaLojaProntuario }
+

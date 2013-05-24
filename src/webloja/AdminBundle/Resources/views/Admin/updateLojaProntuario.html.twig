@@ -1,7 +1,30 @@
 {% extends "::webloja.html.twig" %}
 {% block javascripts %}
     {{ parent() }}
-<script type="text/javascript" src="{{ asset('bundles/admin/js/updateSenhaUsuario.js') }}"></script>
+<script>
+    $(function(){
+         $("#dialog").dialog({
+            autoOpen: false,
+            width: 400,
+            buttons: [
+                {
+                    text: "Ok",
+                    click: function() {
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+        $("#btnBuscaLojaProntuario").click(function(event){
+            event.preventDefault();
+            if($("#updateLojaProntuario_prontuario").val()==""){
+                $("#dialog").dialog("open").html('<br />* Informe o prontuário!');
+            }else{
+                $("#FormUpdateLojaProntuario").submit();
+            }
+        });
+    });
+</script>
 {% endblock %}
 {% block body %}
     <body >
@@ -15,40 +38,30 @@
                         </div>
                 {% endfor %}
                 {% for flashMessage in app.session.flashbag.get('notice_sucesso') %}
-                    <div class="flash-notice alert alert-success">
+                        <div class="flash-notice alert alert-success">
                    {{ flashMessage }}
-                        </div>
+                            </div>
                 {% endfor %}
-                        <form class="form-horizontal" id="FormUpdateSenhaUser" action="{{ path('AdminUpdateSenhaUsuario',{'id_interno': app.request.get('id_interno') }) }}" method="post" {{ form_enctype(form) }}>
+                            <form class="form-horizontal" id="FormUpdateLojaProntuario" action="{{ path('UpdateLojaProntuario',{'id_interno': app.request.get('id_interno') }) }}" method="post" {{ form_enctype(form) }}>
                     {{ form_errors(form) }}
-                                <div class="control-group">
-                            {{ form_label(form.senha,'Senha Atual',{'label_attr': {'class': 'control-label'}}) }}
-                                        <div class="controls">
-                            {{ form_widget(form.senha,{ 'attr': {'class': 'span8'} }) }}
+
+                                    <div class="control-group">
+                                        <div class="text-exception text-error">
+                                        {{ form_errors(form.prontuario) }}
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                            {{ form_label(form.senhaNova,'Nova Senha',{'label_attr': {'class': 'control-label'}}) }}
-                                                <div class="controls">
-                            {{ form_widget(form.login,{ 'attr': {'value': app.session.get('login')} }) }}
-                            {{ form_widget(form.senhaNova,{ 'attr': {'class': 'span8'} }) }}
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                            {{ form_label(form.confirmeSenha,'Confirme a Nova Senha',{'label_attr': {'class': 'control-label'}}) }}
-                                                <div class="controls">
-                            {{ form_widget(form.confirmeSenha,{ 'attr': {'class': 'span8'} }) }}
-                                                </div>
-                                                </div>
-                                                <div class='text-center'>
-                                                     <button type="submit" class="btn btn-small btn-danger" id='btnUpdateUsuario'>Alterar Senha</button>
-                                                </div>
+                            {{ form_label(form.prontuario,'Prontuário',{'label_attr': {'class': 'control-label'}}) }}
+
+                                            <div class="controls">
+                            {{ form_widget(form.prontuario,{ 'attr': {'class': 'span8'} } ) }}
+                                           &nbsp;<button type="submit" class="btn btn-small btn-danger" id='btnBuscaLojaProntuario'>Enviar</button>
+                                           </div>
+                                            </div>
                     {{ form_rest(form) }}
                       </form>
-            </div>
-            <span class='span3'></span>
-            </div>
-    </body>
+                   </div>
+                   <span class='span3'></span>
+                </div>
+</body>
 {% endblock %}
 
 
