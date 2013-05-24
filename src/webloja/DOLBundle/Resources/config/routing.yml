@@ -1,3 +1,4 @@
-dol_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: DolBundle:Default:index }
+TrackAbastecimentoRelatorioDiario:
+    pattern:  /Track/Abastecimento/Relatorio/Diario/{id_interno}
+    defaults: { _controller: DOLBundle:TrackAbastecimento:relatorioAbastecimentoDiario }
+
