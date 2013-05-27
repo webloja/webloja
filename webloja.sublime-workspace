@@ -1,0 +1,251 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tab",
+				"table	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 196.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"table",
+				"Snippet: table - Placeholder"
+			],
+			[
+				"Snippet: table",
+				"Snippet: table - Placeholder"
+			],
+			[
+				"Snippet: boo",
+				"Snippet: Bootstrap error alert"
+			],
+			[
+				"installl",
+				"SymfonyCommander assets:install (Symlinks)"
+			],
+			[
+				"git co",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add Current File"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git push ",
+				"Git: Push Current Branch"
+			],
+			[
+				"git p",
+				"Git: Push Tags"
+			],
+			[
+				"git pu",
+				"Git: Push Current Branch"
+			],
+			[
+				"git",
+				"Git: Push"
+			],
+			[
+				"git:hi",
+				"Git: Commit history"
+			],
+			[
+				"git: Push",
+				"Git: Push"
+			],
+			[
+				"git ad",
+				"Git: Add..."
+			],
+			[
+				"gi",
+				"Git: Diff Current File"
+			],
+			[
+				"sf",
+				"SymfonyCommander Search Input in API"
+			],
+			[
+				"s",
+				"SymfonyTools: Use"
+			],
+			[
+				"symfon",
+				"SymfonyTools: Use"
+			],
+			[
+				"intall",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/webloja/src/webloja/DOLBundle/Resources/views/TrackAbastecimento/abastecimentoDiarioCarregado.html.twig",
+		"/C/programas/Sublime Text 2.0.1/Data/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/programas/Sublime Text 2.0.1/Data/Packages/SublimeCodeIntel/Base File.sublime-settings",
+		"/C/wamp/www/webloja/src/webloja/WeblojaBundle/Controller/LoginController.php",
+		"/C/wamp/www/webloja/src/webloja/DOLBundle/Resources/views/TrackAbastecimento/relatorioAbastecimentoDiario.html.twig",
+		"/C/wamp/www/webloja/src/webloja/AdminBundle/Resources/views/Admin/addCFUserProntuario.html.twig",
+		"/C/wamp/www/webloja/app/Resources/views/webloja.html.twig",
+		"/C/programas/Sublime Text 2.0.1/Data/Packages/User/Preferences.sublime-settings",
+		"/C/programas/Sublime Text 2.0.1/Data/Packages/Default/Preferences.sublime-settings",
+		"/C/wamp/www/webloja/app/Resources/views/base.html.twig",
+		"/C/wamp/www/webloja/src/webloja/WeblojaBundle/WeblojaBundle.php",
+		"/C/wamp/www/webloja/src/webloja/AdminBundle/Controller/AdminController.php",
+		"/C/wamp/www/webloja/src/webloja/AdminBundle/Form/Type/AddCFUserProntuarioType.php",
+		"/C/programas/Sublime Text 2.0.1/Data/Packages/Git/Git.sublime-settings",
+		"/C/wamp/www/webloja/README.md",
+		"/C/wamp/www/webloja/src/webloja/DOLBundle/Resources/public/js/relatorioAbastecimentoDiario.js",
+		"/C/wamp/www/webloja/src/webloja/ChamadosBundle/Controller/ChamadosController.php",
+		"/C/wamp/www/webloja/src/webloja/WeblojaBundle/Controller/MenuController.php",
+		"/C/wamp/www/webloja/src/webloja/WeblojaBundle/Controller/HomeController.php",
+		"/C/wamp/www/webloja/src/webloja/LIB/TRfc.php",
+		"/C/wamp/www/webloja/src/webloja/LIB/producao.ini",
+		"/C/wamp/www/webloja/src/webloja/LIB/DBALConnection.php",
+		"/C/programas/Sublime Text 2.0.1/Data/Packages/SideBarGit/SideBarGit.sublime-settings",
+		"/C/wamp/www/webloja/src/Controller/TesteController.php",
+		"/C/wamp/www/webloja/src/Controller/WeblojaBundle:TesteController.php",
+		"/C/wamp/www/webloja/src/webloja/WeblojaBundle/Controller/CentralRegionalLojaController.php",
+		"/C/wamp/www/webloja/src/webloja/WeblojaBundle/Tests/Controller/DefaultControllerTest.php"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SymfonyCommander":
+	{
+		"height": 148.0
+	},
+	"output.git":
+	{
+		"height": 355.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true
+}
