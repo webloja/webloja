@@ -6,6 +6,11 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA
   - Esta sendo usado o Twitter-Bootstrap para desenhar as telas.
   - Realizando integração com Twig do próprio Symfony 2.
 
+** PADRÕES DO SISTEMA
+----------------------
+	- Formatação dos butões do sistema:
+				- class='btn btn-danger btn-mini', estão sendo usados também nos botões os icones do bootstrab.
+
 ** LOGIN DO SISTEMA
 -------------------
   - Esta sendo o feito o mesmo que o webloja atual, com adaptações para integrar-se com o symfony.
@@ -107,5 +112,8 @@ código na pagina html
         maskInput: true
 });
 
- - para outras configurações acessar o site: http://tarruda.github.io/bootstrap-datetimepicker/
+ - para outras configurações acessar o site: 
+ 
+ http://tarruda.github.io/bootstrap-datetimepicker/
+ 
  OBS: o plugin já foi modificado para mostrar dados em portugues Brasil.
