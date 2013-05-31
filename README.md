@@ -9,7 +9,7 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA
 ** PADRÕES DO SISTEMA
 ----------------------
 	- Formatação dos butões do sistema:
-				- class='btn btn-danger btn-mini', estão sendo usados também nos botões os icones do bootstrab.
+	- class='btn btn-danger btn-mini', estão sendo usados também nos botões os icones do bootstrab.
 
 ** LOGIN DO SISTEMA
 -------------------
@@ -66,6 +66,17 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA
         if($id_interno!=null){
              MenuRepository::getIdInterno($id_interno,$session);
         }
+   - Biblioteca ExcelWriter.php
+        - Foi nescessário criar uma nova biblioteca para gerar arquivos .xls(Excel).
+            É euma classe simples , que faz a leitura de uma tabela html,
+            a classe é composta pelos metodos:
+            - setNameArquivo($arquivo): Recebe como parametro no nome do arquivo.
+            - createTituloCol($valor): Cria a linha contendo os lables de cada coluna, recebe como parametro
+              o nome dessa coluna.
+            - createCol($linha, $valor): Cria as linhas e colunas referentes ao conteudo da planilha.
+            - createArquivo(): Monta o arquivo .xls.
+            - gerarExcel(): executa o metodo privado createArquivo(), para gerar o arquivo .xls.
+            
 
 ** ALERTAS JQUERY
 ==========
