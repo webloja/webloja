@@ -68,13 +68,19 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA
         }
    - Biblioteca ExcelWriter.php
         - Foi nescessário criar uma nova biblioteca para gerar arquivos .xls(Excel).
-            É euma classe simples , que faz a leitura de uma tabela html,
+
+            É uma classe simples , que faz a leitura de uma tabela html,
             a classe é composta pelos metodos:
+
             - setNameArquivo($arquivo): Recebe como parametro no nome do arquivo.
+
             - createTituloCol($valor): Cria a linha contendo os lables de cada coluna, recebe como parametro
               o nome dessa coluna.
+
             - createCol($linha, $valor): Cria as linhas e colunas referentes ao conteudo da planilha.
+
             - createArquivo(): Monta o arquivo .xls.
+
             - gerarExcel(): executa o metodo privado createArquivo(), para gerar o arquivo .xls.
             
 
