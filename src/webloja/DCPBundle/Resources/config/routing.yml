@@ -1,3 +1,7 @@
-dcp_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: DcpBundle:Default:index }
+DCPCriarControleFisico9000:
+    pattern:  /DCP/Criar/Controle/Fisico/9000/{id_interno}
+    defaults: { _controller: DCPBundle:ControleFisico:indexControleFisico9000 }
+
+ValidaSAPControleFisico9000:
+    pattern:  /DCP/Valida/SAP/Controle/Fisico/9000
+    defaults: { _controller: DCPBundle:ControleFisico:validaSap }
