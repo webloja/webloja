@@ -1,6 +1,14 @@
 <?php
-
 namespace webloja\LIB;
+/**
+ * 
+ * Classe para gerar rfc
+ * 
+ * @author Douglas Silva
+ * @version 1.0
+ * 
+ */
+
 
 use webloja\LIB\DBALConnection;
 
