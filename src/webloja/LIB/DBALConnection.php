@@ -1,5 +1,14 @@
 <?php
 namespace webloja\LIB;
+/**
+ * 
+ * Classe para conexão com banco de dados
+ * 
+ * @author Douglas Silva
+ * @version 1.0
+ * 
+ */
+
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Configuration;
 
