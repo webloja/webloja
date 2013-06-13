@@ -1,4 +1,4 @@
-DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.1
+DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
 ===============================
 
 ** CAMADA VIEW
