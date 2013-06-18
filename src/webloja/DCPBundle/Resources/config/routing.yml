@@ -5,3 +5,11 @@ DCPCriarControleFisico9000:
 ValidaSAPControleFisico9000:
     pattern:  /DCP/Valida/SAP/Controle/Fisico/9000
     defaults: { _controller: DCPBundle:ControleFisico:validaSap }
+    
+VerificaProntuarioControleFisico9000:
+    pattern:  /DCP/Verifica/Prontuario/Controle/Fisico/9000
+    defaults: { _controller: DCPBundle:ControleFisico:verificaProntuarioControle9000 }
+    
+CreateControleFisico9000:
+    pattern:  /DCP/Create/Controle/Fisico/9000
+    defaults: { _controller: DCPBundle:ControleFisico:createControleFisico9000 }
