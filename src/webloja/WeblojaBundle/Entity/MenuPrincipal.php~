@@ -1,0 +1,59 @@
+<?php
+
+namespace webloja\WeblojaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * Produto
+ *
+ * @ORM\Entity(repositoryClass="webloja\WeblojaBundle\Repository\MenuRepository")
+ * @ORM\Table(name="menu_interno")
+ */
+class MenuPrincipal
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_menu", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_departamento", type="integer", nullable=true)
+     * @Assert\NotBlank(message="Campo obrigatório")
+     */
+    private $id_departamento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="menu", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="Campo obrigatório")
+     */
+    private $menu;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ordem", type="integer", nullable=true)
+     * @Assert\NotBlank(message="Campo obrigatório")
+     * @Assert\Range(invalidMessage="Campo não é número", max="999", maxMessage="O valor deve ser menor que 1000", min="1", minMessage="O valor mínimo é 1")
+     */
+    private $ordem;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ativo", type="boolean")
+     * @Assert\NotBlank(message="Campo obrigatório")
+     * @Assert\Range(invalidMessage="Campo não é número", max="1", maxMessage="O campo deve ser 0 ou 1", min="0", minMessage="O campo deve ser 0 ou 1")
+     */
+    private $ativo;
+}

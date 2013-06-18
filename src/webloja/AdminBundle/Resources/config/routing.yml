@@ -1,3 +1,18 @@
 AdminUsuarioNovo:
     pattern:  /Admin/Usuario/Novo/{id_interno}
     defaults: { _controller: AdminBundle:Admin:index }
+
+AdminUpdateSenhaUsuario:
+    pattern:  /
+    
+AdminUpdateSenhaProntuario:
+    pattern:  /
+    
+UpdateLojaProntuario:
+    pattern:  /
+    
+ResetSenhaProntuario:
+    pattern:  /
+    
+TrackAbastecimentoRelatorioDiario:
+    pattern:  /

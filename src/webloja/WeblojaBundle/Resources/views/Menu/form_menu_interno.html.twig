@@ -1,81 +1,122 @@
 {% extends 'webloja.html.twig' %}
 
-{% block title %} Criar Menu Interno - WebLoja! {% endblock %}
+{% block title %} Salvar Menu Interno - WebLoja! {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('#btnCancelar').click(function(){
+
+               document.location = '{{ path('webloja_menu_interno') }}';
+
+            });
+
+        });
+    </script>
+{% endblock %}
 
 {% block body %} 
 <div class="row-fluid"> 
-    <div class="span3"></div>
-    <div class='span6'>
+    <div class="span2"></div>
+    <div class='span8'>
         <div class="well well-small">
-            <form class="form-horizontal" action="webloja" method="post" {#{{ form_enctype(form) }} #}>       
+            {% if form_errors(form) | length > 0 %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+dd
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+                
+            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_interno_salvar', {'id': id_menu}) : path('webloja_menu_interno_salvar') }}" method="post" {{ form_enctype(form) }}>       
                 <div class="control-group">
                     <div class="controls text-center">
-                        <label class="control-label"><strong>&Aacute;rea Restrita</strong></label>
+                        <label class="control-label span4"><strong>{{ id_menu is not empty ? 'Editar' : 'Cadastrar' }} Menu Interno</strong></label>
                     </div>
                 </div>
-                {# {{ form_errors(form) }} #}
                 <hr />
-
+                
                 <div class="control-group">
-                    <label for="">Titulo</label>
+                    {{ form_label(form.titulo, 'Título:', {'label_attr': {'class': 'control-label'}}) }}
 
                     <div class="controls">
-                         <input type="text" class="input-xlarge" />
+                          {{ form_widget(form.titulo, {'attr': {'class': 'span7'}}) }}
                     </div>
                 </div>
-
+                
                 <div class="control-group">
-                    <label for="">Ordem</label>
+                    {{ form_label(form.menu, 'Menu:', {'label_attr': {'class': 'control-label'}}) }}
 
                     <div class="controls">
-                        <input type="number" class="input-large" />
-                    </div>
-                </div>
-
-                 <div class="control-group">
-                    <label for="">Permissão</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-large" />
+                          {{ form_widget(form.menu, {'attr': {'class': 'input-xlarge'}}) }}
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label for="">Rota</label>
+                    {{ form_label(form.link, 'Link:', {'label_attr': {'class': 'control-label'}}) }}
 
                     <div class="controls">
-                        <input type="text" class="input-large" />
+                          {{ form_widget(form.link, {'attr': {'class': 'input-large'}}) }}
                     </div>
                 </div>
-
-                 <div class="control-group">
-                    <label for="" class="control-label">Menu</label>
+                
+               <div class="control-group">
+                    {{ form_label(form.rota, 'Rota:', {'label_attr': {'class': 'control-label'}}) }}
 
                     <div class="controls">
-                        <select>
-                            <option value="">Selecione...</option>
-                        </select>
+                          {{ form_widget(form.rota, {'attr': {'class': 'input-large'}}) }}
                     </div>
-                </div>
-
-                <div class="control-group">
-                    <label for="">Menu pai</label>
+               </div>
+               
+               <div class="control-group">
+                    {{ form_label(form.pai, 'Menu Pai:', {'label_attr': {'class': 'control-label'}}) }}
 
                     <div class="controls">
-                        <select>
-                            <option value="">Selecione...</option>
-                        </select>
+                          {{ form_widget(form.pai, {'attr': {'class': 'input-xlarge'}}) }}
                     </div>
-                </div>
+               </div> 
+                
+               <div class="control-group">
+                    {{ form_label(form.permissao, 'Permissão:', {'label_attr': {'class': 'control-label'}}) }}
 
-                <div class="control-group">
+                    <div class="controls">
+                          {{ form_widget(form.permissao, {'attr': {'class': 'input-mini'}}) }}
+                    </div>
+               </div>
+                
+               <div class="control-group">
+                    {{ form_label(form.ordem, 'Ordem:', {'label_attr': {'class': 'control-label'}}) }}
+
+                    <div class="controls">
+                          {{ form_widget(form.ordem, {'attr': {'class': 'input-mini'}}) }}
+                    </div>
+               </div> 
+                
+               <div class="control-group">
                     <div class="controls">
                       <label class="checkbox">
-                          <input type="radio" value="1" name="chkStatus" checked="checked" />Ativo
-                          <input type="radio" value="0" name="chkStatus" />Inativo
+                          {% if id_menu is not empty %}
+                            {{ form_widget(form.ativo) }} Ativo
+                          {% else %}
+                            {{ form_widget(form.ativo, {'attr': {'checked': 'checked'}}) }} Ativo
+                          {% endif %}
                       </label>
                     </div>
-                </div>
+               </div>
+                
+               <div class="control-group">
+                    <div class="controls">
+                          {{ form_rest(form) }}
+
+                         <button type="submit" class="btn btn-small btn-danger" id='btnCriarUsuario'>Cadastrar</button>
+                         <input id="btnCancelar" type="button"  class="btn btn-small btn-default" value="Cancelar" />
+                    </div>
+               </div>
+            </div>
             </form>
         </div>
     {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -86,7 +127,7 @@
         
     </div>
     
-    <div class='span3'></div>
+    <div class='span2'></div>
 </div>
 
 {% endblock %}

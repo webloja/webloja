@@ -1,0 +1,98 @@
+{% extends 'webloja.html.twig' %}
+
+{% block title %} {{ id_menu is not empty ? 'Editar' : 'Cadastrar' }} Menu - WebLoja! {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('#btnCancelar').click(function(){
+
+               document.location = '{{ path('webloja_menu_consultar') }}';
+
+            });
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %} 
+<div class="row-fluid"> 
+    <div class="span3"></div>
+    <div class='span6'>
+        <div class="well well-small">
+            
+            {% if form_errors(form) | length > 0 %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+            
+            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_salvar', {'id': id_menu}) : path('webloja_menu_salvar') }}" method="post" {{ form_enctype(form) }} >       
+                <div class="control-group">
+                    <div class="controls text-center">
+                        <label class="control-label"><strong>{{ id_menu is not empty ? 'Editar' : 'Cadastrar' }} Menu</strong></label>
+                    </div>
+                </div>
+                
+                <hr />
+
+                <div class="control-group">
+                    {{ form_label(form.menu, 'Menu:', {'label_attr': {'class': 'control-label'}}) }}
+
+                    <div class="controls">
+                          {{ form_widget(form.menu, {'attr': {'class': 'input-xlarge'}}) }}
+                    </div>
+                </div>
+
+                 <div class="control-group">
+                    {{ form_label(form.departamento, 'Departamento:', {'label_attr': {'class': 'control-label'}}) }}
+
+                    <div class="controls">
+                         {{ form_widget(form.departamento, {'attr': {'class': 'span6'}}) }}
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    {{ form_label(form.ordem, 'Ordem:', {'label_attr': {'class': 'control-label'}}) }}
+
+                    <div class="controls">
+                        {{ form_widget(form.ordem, {'attr': {'class': 'input-mini'}, 'max_length': '3'}) }}
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="controls">
+                      <label class="checkbox">
+                          {% if id_menu is not empty %}
+                            {{ form_widget(form.ativo) }} Ativo
+                          {% else %}
+                            {{ form_widget(form.ativo, {'attr': {'checked': 'checked'}}) }} Ativo
+                          {% endif %}
+                      </label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="controls">
+                       {{ form_rest(form) }}
+                            
+                        <button type="submit" class="btn btn-small btn-danger" id='btnCriarUsuario'>Salvar</button>
+                        <input type="button" class="btn btn-small btn-default" value="Cancelar" id="btnCancelar" />
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class='span3'></div>
+</div>
+
+{% endblock %}

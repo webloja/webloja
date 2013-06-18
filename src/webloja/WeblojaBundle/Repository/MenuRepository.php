@@ -2,8 +2,48 @@
 
 namespace webloja\WeblojaBundle\Repository;
 
-class MenuRepository {
+use Doctrine\ORM\EntityRepository;
 
+class MenuRepository extends EntityRepository {
+
+    public function listarMenus()
+    {
+        $em = $this->getEntityManager();
+        $dql = 'SELECT m, d FROM WeblojaBundle:Menu m JOIN m.departamento d ORDER BY m.menu ASC';
+        $query = $em->createQuery($dql);
+        
+        return $query->getResult();
+    }
+    
+    public function listarMenusInternos($id_menu)
+    {
+        $em = $this->getEntityManager();
+        $dql = '';
+        $query = '';
+        if (is_null($id_menu))
+        {
+            $dql = 'SELECT m, a FROM WeblojaBundle:MenuInterno m JOIN m.menu a ORDER BY m.titulo ASC';
+            $query = $em->createQuery($dql);
+        }
+        else
+        {
+            $dql = 'SELECT m, a FROM WeblojaBundle:MenuInterno m JOIN m.menu a WHERE m.id_menu = :menu ORDER BY m.titulo ASC';
+            $query = $em->createQuery($dql);
+            $query->setParameter('menu', $id_menu);
+        }
+        
+        return $query->getResult();
+    }
+    
+    public function listarMenuPrincipal()
+    {
+        $em = $this->getEntityManager();
+        $dql = 'SELECT d FROM WeblojaBundle:MenuDepartamento d ORDER BY d.departamento ASC';
+        $query = $em->createQuery($dql);
+        
+        return $query->getResult();
+    }
+    
     public static function getMenu($id_perfil, $conn) {
 
         return $conn->fetchAll("SELECT d.id_departamento, d.departamento, d.ordem 
