@@ -1,6 +1,7 @@
 DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
 ===============================
 
+<<<<<<< HEAD
 ** TESTE DE CONFLITO
 --------------
   - Esta sasdasdasdas
@@ -22,6 +23,26 @@ sdf
 sd
 fsd
 f - DABundle: Programas usados pelo departamento DA.
+=======
+** PADRÕES DO SISTEMA
+----------------------
+	- Formatação dos butões do sistema:
+	- class='btn btn-danger btn-mini', estão sendo usados também nos botões os icones do bootstrab.
+
+** LOGIN DO SISTEMA
+-------------------
+  - Esta sendo o feito o mesmo que o webloja atual, com adaptações para integrar-se com o symfony.
+
+** ORGANIZAÇÃO DO SISTEMA
+--------------------------
+ - O sistema esta organizado em Bundles, onde cada Departamento que intitula um menu principal forma um Bundle, possuindo também um Bundle geral onde são colocados os programas e códigos que são usados por todos os outros Bundles.
+
+** BUNDLES
+----------
+  - AdminBundle: Aqui são colocados os programas ´referentes a parte administrativa do sistema webloja.
+  - ChamadosBundle: Programas do modulo de apertura de chamados.
+  - DABundle: Programas usados pelo departamento DA.
+>>>>>>> f2f720be84c0a54f157b6d01821ca45aad838b47
   - DCM: Programas usados pelo departamento DCM.
   - DCP: Programas usados pelo departamento DCP.
   - DFI: Programas usados pelo departamento DFI.
