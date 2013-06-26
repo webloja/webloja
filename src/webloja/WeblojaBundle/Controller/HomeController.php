@@ -7,13 +7,9 @@ use webloja\WeblojaBundle\Repository\HomeRepository;
 
 class HomeController extends Controller
 {
-    private $conn;
     
     public function indexAction(){
-        
-        
-        $this->conn = $this->get('database_connection');
-        
+
         $session = $this->getRequest()->getSession();
         $session->remove('id_interno');
         $loja = $session->get('local');
@@ -28,11 +24,11 @@ class HomeController extends Controller
         $homedb = new HomeRepository();
         
         
-        $pMarketing = $homedb->getMarketing($loja,$this->conn);
-        $pMerchandising = $homedb->getMerchandising($loja,$this->conn);
-        $pNoticiaDol = $homedb->getNoticiaDol($loja,$this->conn);
-        $pNotificacaoGeral = $homedb->getNotificacaoGeral($loja,$this->conn);
-        $pBanner = $homedb->getBanner($this->conn,1);
+        $pMarketing = $homedb->getMarketing($loja);
+        $pMerchandising = $homedb->getMerchandising($loja);
+        $pNoticiaDol = $homedb->getNoticiaDol($loja);
+        $pNotificacaoGeral = $homedb->getNotificacaoGeral($loja);
+        $pBanner = $homedb->getBanner(1);
         
         return $this->render('WeblojaBundle:Home:principal.html.twig', array('objMarketing' => $pMarketing,
             'objMerchandising' => $pMerchandising,'objNoticiaDol' => $pNoticiaDol ,

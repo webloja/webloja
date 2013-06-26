@@ -66,7 +66,6 @@ class MenuController extends Controller
     {
         $session    = $this->get('session');
         $requisicao = $this->getRequest();
-        
         $id_interno = $session->get('id_interno');
         
         /**
@@ -74,11 +73,9 @@ class MenuController extends Controller
          * precisa se r colocado em toda p�gina que gera formul�rio
          * ou que tenha sa�da para templatef
          */
-        if($id_interno!=null)
-        {
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno, $this->conn, $session);
-        }
+        if($id_interno!=null) {
+             MenuRepository::getIdInterno($id_interno, $session);
+        }     
         
         $menu_interno = new MenuInterno();
         if (!empty($id))
@@ -121,7 +118,7 @@ class MenuController extends Controller
             }
         }
         
-        return $this->render('WeblojaBundle:Menu:form_menu_interno.html.twig', array('form' => $form->createView(), 'id_menu' => $menu_interno->getId()));
+        return $this->render('WeblojaBundle:Menu:form_menu_interno.html.twig', array('form' => $form->createView(), 'id_menu' => $menu_interno->getId(), 'id_interno' => $id_interno));
     }
     
     public function excluirMenuInternoAction($id = NULL)
@@ -166,19 +163,16 @@ class MenuController extends Controller
     {
         $session = $this->get('session');
         $requisicao = $this->getRequest();
-        
         $id_interno = $session->get('id_interno');
+        
         /**
          * Condigo referente a montagem do t�tulo da pagina
          * precisa se r colocado em toda p�gina que gera formul�rio
          * ou que tenha sa�da para template
          */
-        if($id_interno!=null)
-        {
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno, $this->conn, $session);
-        }        
-        
+        if($id_interno!=null) {
+             MenuRepository::getIdInterno($id_interno, $session);
+        }
         
         $menu = new Menu();
         if (!empty($id))
@@ -244,45 +238,41 @@ class MenuController extends Controller
         return $this->redirect($this->generateUrl('webloja_menu_consultar'));
     }
     
-    public function consultarMenuPrincipalAction()
+    public function consultarMenuPrincipalAction($id_interno)
     {
         $session    = $this->get('session');
-        $requisicao = $this->getRequest();
+        //$id_interno = $session->get('id_interno');
         
-        $id_interno = $session->get('id_interno');
          /**
          * Condigo referente a montagem do t�tulo da pagina
          * precisa se r colocado em toda p�gina que gera formul�rio
          * ou que tenha sa�da para template
          */
-        if($id_interno!=null){
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno, $this->conn, $session);
-        }        
+        if($id_interno!=null) {
+             MenuRepository::getIdInterno($id_interno, $session);
+        }       
         
         $em = $this->getDoctrine()->getEntityManager();
         
         $menusInternos = $em->getRepository('WeblojaBundle:Menu')->listarMenuPrincipal();
         
-        return $this->render('WeblojaBundle:Menu:listar_menu_principal.html.twig', array('menus' => $menusInternos));
+        return $this->render('WeblojaBundle:Menu:listar_menu_principal.html.twig', array('menus' => $menusInternos, 'id_interno' => $id_interno));
     }
     
     public function salvarMenuPrincipalAction($id = NULL)
     {
         $session = $this->get('session');
         $requisicao = $this->getRequest();
-        
         $id_interno = $session->get('id_interno');
+        
         /**
          * Condigo referente a montagem do t�tulo da pagina
          * precisa se r colocado em toda p�gina que gera formul�rio
          * ou que tenha sa�da para template
          */
-        if($id_interno!=null)
-        {
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno, $this->conn, $session);
-        }
+        if($id_interno!=null) {
+             MenuRepository::getIdInterno($id_interno, $session);
+        }     
         
         $menu_departamento = new MenuDepartamento();
         if (!empty($id))
@@ -313,49 +303,45 @@ class MenuController extends Controller
     }
     
     
-    public function consultarMenuAction($id_interno = NULL)
+    public function consultarMenuAction($id_interno)
     {
         $session = $this->get('session');
-        $requisicao = $this->getRequest();
+        //$id_interno = $session->get('id_interno');
         
-        $id_interno = $session->get('id_interno');
          /**
          * Condigo referente a montagem do t�tulo da pagina
          * precisa se r colocado em toda p�gina que gera formul�rio
          * ou que tenha sa�da para template
          */
-        if($id_interno!=null){
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno, $this->conn, $session);
+        if($id_interno!=null) {
+             MenuRepository::getIdInterno($id_interno, $session);
         }        
         
         $em = $this->getDoctrine()->getManager();
         
         $menusInternos = $em->getRepository('WeblojaBundle:Menu')->listarMenus();
         
-        return $this->render('WeblojaBundle:Menu:listar_menu.html.twig', array('menus' => $menusInternos));
+        return $this->render('WeblojaBundle:Menu:listar_menu.html.twig', array('menus' => $menusInternos, 'id_interno' => $id_interno));
     }
     
-    public function consultarMenuInternoAction($id_menu = NULL)
+    public function consultarMenuInternoAction($id_interno, $id_menu = NULL)
     {
         $session = $this->get('session');
-        $requisicao = $this->getRequest();
+        //$id_interno = $session->get('id_interno');
         
-        $id_interno = $session->get('id_interno');
-         /**
+        /**
          * Condigo referente a montagem do t�tulo da pagina
          * precisa se r colocado em toda p�gina que gera formul�rio
          * ou que tenha sa�da para template
          */
-        if($id_interno!=null){
-             $this->conn = $this->get('database_connection');
-             MenuRepository::getIdInterno($id_interno, $this->conn, $session);
-        }        
+        if($id_interno!=null) {
+             MenuRepository::getIdInterno($id_interno, $session);
+        }       
         
         $em = $this->getDoctrine()->getEntityManager();
         
         $menusInternos = $em->getRepository('WeblojaBundle:MenuInterno')->listarMenusInternos($id_menu);
         
-        return $this->render('WeblojaBundle:Menu:listar_menu_interno.html.twig', array('menus' => $menusInternos));
+        return $this->render('WeblojaBundle:Menu:listar_menu_interno.html.twig', array('menus' => $menusInternos, 'id_interno' => $id_interno));
     }
 }

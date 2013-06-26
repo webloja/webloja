@@ -11,10 +11,24 @@
 
             $('#btnCancelar').click(function(){
 
-               document.location = '{{ path('webloja_menu_interno') }}';
+               document.location = '{{ path('webloja_menu_interno', {'id_interno': app.session.get('id_interno')}) }}';
 
             });
-
+            
+            var regras = [
+                ['#frmMenuInterno_titulo, #frmMenuDepartamento_menu, #frmMenuInterno_link, #frmMenuInterno_pai, #frmMenuInterno_permissao', 'presence', 'Este campo é obrigatório!'],
+                ['#frmMenuInterno_titulo, #frmMenuInterno_link', 'min-length:4', 'Este campo deve possuir 4 caracteres no mínimo!'],
+                ['#frmMenuInterno_titulo, #frmMenuInterno_link', 'max-length:45', 'Este campo deve possuir 45 caracteres no máximo!'],
+                ['#frmMenuInterno_rota', 'max-length:50', 'Este campo deve possuir 4 caracteres no máximo!'],
+                ['#frmMenuInterno_ordem', 'integer', 'Este campo deve ser um número!'],
+                ['#frmMenuInterno_ordem', 'min-num:0', 'O valor mínimo para este campo é 0!']
+            ];
+              
+            var options = {
+                'submitBtnSelector' : '#btnCriarMenuInterno'
+            };
+            
+            $( "#frmMenuInterno" ).nod(regras, options);
         });
     </script>
 {% endblock %}
@@ -27,12 +41,12 @@
             {% if form_errors(form) | length > 0 %}
                 <div class="alert alert-error">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-dd
+                    
                     {{ form_errors(form) }}
                 </div>
             {% endif %}
                 
-            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_interno_salvar', {'id': id_menu}) : path('webloja_menu_interno_salvar') }}" method="post" {{ form_enctype(form) }}>       
+            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_interno_salvar', {'id': id_menu}) : path('webloja_menu_interno_salvar') }}" method="post" {{ form_enctype(form) }} id="frmMenuInterno">       
                 <div class="control-group">
                     <div class="controls text-center">
                         <label class="control-label span4"><strong>{{ id_menu is not empty ? 'Editar' : 'Cadastrar' }} Menu Interno</strong></label>
@@ -112,7 +126,7 @@ dd
                     <div class="controls">
                           {{ form_rest(form) }}
 
-                         <button type="submit" class="btn btn-small btn-danger" id='btnCriarUsuario'>Cadastrar</button>
+                         <button type="submit" class="btn btn-small btn-danger" id='btnCriarMenuInterno'>Cadastrar</button>
                          <input id="btnCancelar" type="button"  class="btn btn-small btn-default" value="Cancelar" />
                     </div>
                </div>

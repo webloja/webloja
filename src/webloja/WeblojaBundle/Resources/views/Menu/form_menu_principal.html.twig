@@ -11,10 +11,24 @@
 
             $('#btnCancelar').click(function(){
 
-               document.location = '{{ path('webloja_menu_interno_consultar') }}';
+               document.location = '{{ path('webloja_menu_principal', {'id_interno': app.session.get('id_interno')}) }}';
 
             });
-
+            
+            // Validação do formulário utilizando o framework nod!
+            var regras = [
+                [ '#frmMenuDepartamento_departamento, #frmMenuDepartamento_ordem', 'presence', 'Este campo é obrigatório!'],
+                [ '#frmMenuDepartamento_departamento', 'min-length:4', 'Este campo deve possuir 4 caracteres no mínimo!'],
+                [ '#frmMenuDepartamento_departamento', 'max-length:45', 'Este campo deve possuir 45 caracteres no máximo!'],
+                [ '#frmMenuDepartamento_ordem', 'integer', 'Este campo deve ser um número!'],
+                [ '#frmMenuDepartamento_ordem', 'min-num:0', 'O valor mínimo para este campo é 0!']
+            ];
+              
+            var options = {
+                'submitBtnSelector' : '#btnCriarMenuPrincipal'
+            };
+            $( "#frmMenuPrincipal" ).nod(regras, options);
+            
         });
     </script>
 {% endblock %}
@@ -33,7 +47,7 @@
                 </div>
             {% endif %}
             
-            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_principal_salvar', {'id': id_menu}) : path('webloja_menu_principal_salvar') }}" method="post" {{ form_enctype(form) }} >       
+            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_principal_salvar', {'id': id_menu}) : path('webloja_menu_principal_salvar') }}" method="post" {{ form_enctype(form) }} id="frmMenuPrincipal">       
                 <div class="control-group">
                     <div class="controls text-center">
                         <label class="control-label"><strong>{{ id_menu is not empty ? 'Editar' : 'Cadastrar' }} Menu</strong></label>

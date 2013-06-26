@@ -3,6 +3,7 @@
 namespace webloja\WeblojaBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use webloja\LIB\DBALConnection;
 
 class MenuRepository extends EntityRepository {
 
@@ -44,55 +45,86 @@ class MenuRepository extends EntityRepository {
         return $query->getResult();
     }
     
-    public static function getMenu($id_perfil, $conn) {
+    public static function getMenu($id_perfil) {
 
-        return $conn->fetchAll("SELECT d.id_departamento, d.departamento, d.ordem 
+        $conn = DBALConnection::getDBALConection();
+        $sql = "SELECT d.id_departamento, d.departamento, d.ordem 
             FROM lasasap.menu_departamentos d 
             JOIN lasasap.menu m ON m.id_departamento = d.id_departamento 
             JOIN lasasap.menu_perfil p ON p.id_menu = m.id_menu 
-            WHERE (p.id_perfil = $id_perfil) 
-            GROUP BY d.id_departamento ORDER BY d.ordem ASC");
+            WHERE p.id_perfil = :id_perfil AND d.ativo = :ativo
+            GROUP BY d.id_departamento ORDER BY d.ordem ASC";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("id_perfil",$id_perfil);
+        $stmt->bindValue("ativo",1);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        
     }
 
-    public static function getSubMenu($id_departamento, $id_perfil, $conn) {
+    public static function getSubMenu($id_departamento, $id_perfil) {
 
-        return $conn->fetchAll("SELECT m.id_menu, m.menu 
-            FROM lasasap.menu m 
-            JOIN lasasap.menu_perfil p ON p.id_menu = m.id_menu 
-            WHERE (p.id_perfil = $id_perfil and m.ativo = 1 and m.id_departamento = $id_departamento ) 
-            ORDER BY ordem ASC");
+        $conn = DBALConnection::getDBALConection();
+        $sql = "SELECT m.id_menu, m.menu 
+            FROM lasasap.menu m JOIN lasasap.menu_perfil p ON p.id_menu = m.id_menu 
+            WHERE p.id_perfil = :id_perfil and m.ativo = 1 and m.id_departamento = :id_departamento  
+            ORDER BY ordem ASC";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("id_perfil",$id_perfil);
+        $stmt->bindValue("id_departamento",$id_departamento);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        
     }
 
-    public static function getSubMenuInterno($id_menu, $conn, $perfil) {
+    public static function getSubMenuInterno($id_menu, $perfil) {
 
         if ($perfil == "CR") {
             $wherePefil = 'and permissao = 2';
         } else {
             $wherePefil = "";
         }
-        return $conn->fetchAll("SELECT id_interno, titulo, link, rota, pai  
-            FROM lasasap.menu_interno WHERE (id_menu = $id_menu AND ativo = '1' and pai is null $wherePefil )");
+        $conn = DBALConnection::getDBALConection();
+        $sql = "SELECT id_interno, titulo, link, rota, pai  
+            FROM lasasap.menu_interno WHERE (id_menu = :id_menu AND ativo = :ativo and pai is null $wherePefil )";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("id_menu",$id_menu);
+        $stmt->bindValue("ativo",1);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
-    public static function getSubMenuInternoNivel2($id_menu, $conn) {
+    public static function getSubMenuInternoNivel2($id_menu) {
 
-//        return $conn->fetchAll("SELECT pai FROM lasasap.menu_interno WHERE id_menu = $id_menu AND ativo = '1'
-//and pai is not null group by pai");
-        return $conn->fetchAll("SELECT mi.pai,mi.id_menu,mi2.titulo FROM lasasap.menu_interno mi 
+        $conn = DBALConnection::getDBALConection();
+        $sql = "SELECT mi.pai,mi.id_menu,mi2.titulo FROM lasasap.menu_interno mi 
              inner join lasasap.menu_interno mi2 on mi2.id_interno=mi.pai 
-             WHERE mi.id_menu = $id_menu AND mi.ativo = '1' 
-             and mi.pai is not null group by mi.pai");
+             WHERE mi.id_menu = :id_menu AND mi.ativo = :ativo 
+             and mi.pai is not null group by mi.pai";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("id_menu",$id_menu);
+        $stmt->bindValue("ativo",1);
+        $stmt->execute();
+        return $stmt->fetchAll();
+
     }
 
-    public static function getSubMenuInternoNivel3($id_pai, $conn) {
+    public static function getSubMenuInternoNivel3($id_pai) {
 
-        return $conn->fetchAll("SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
-            WHERE pai = $id_pai AND ativo = '1'");
+        $conn = DBALConnection::getDBALConection();
+        $sql = "SELECT SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
+            WHERE pai = :id_pai AND ativo = :ativo";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("id_pai",$id_pai);
+        $stmt->bindValue("ativo",1);
+        $stmt->execute();
+        return $stmt->fetchAll();
+
     }
 
-    public static function geraMenuHtml($id_perfil, $conn, $cr) {
+    public static function geraMenuHtml($id_perfil, $cr) {
 
-        $rMenu = MenuRepository::getMenu($id_perfil, $conn);
+        $rMenu = MenuRepository::getMenu($id_perfil);
 
         $menuNav = '<div class = "navbar">' . "\n";
         $menuNav .= '<div class = "navbar-inner">' . "\n";
@@ -106,14 +138,14 @@ class MenuRepository extends EntityRepository {
             $menuNav .= '<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" >' . $rMenu[$i]["departamento"] . '<b class = "caret"></b></a>' . "\n";
 
             //subMenu
-            $rSubMenu = MenuRepository::getSubMenu($rMenu[$i]["id_departamento"], $id_perfil, $conn);
+            $rSubMenu = MenuRepository::getSubMenu($rMenu[$i]["id_departamento"], $id_perfil);
             $menuNav .= '<ul class="dropdown-menu">' . "\n";
             for ($j = 0; $j < count($rSubMenu); $j++) {
                 $menuNav .= '<li class="dropdown-submenu">' . "\n";
                 $menuNav .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">' . $rSubMenu[$j]["menu"] . '</a>' . "\n";
                 //dados para o menu interno
 
-                $rSubMenuInterno = MenuRepository::getSubMenuInterno($rSubMenu[$j]["id_menu"], $conn, $cr);
+                $rSubMenuInterno = MenuRepository::getSubMenuInterno($rSubMenu[$j]["id_menu"], $cr);
 
                 $menuNav .= '<ul class="dropdown-menu">' . "\n";
 
@@ -130,12 +162,12 @@ class MenuRepository extends EntityRepository {
                         }
                         $menuNav .= '<li><a href="' . $rotaFinal . '">' . $rSubMenuInterno[$si]["titulo"] . '</a></li>' . "\n";
                     } else {
-                        $rSubMenuInterno2 = MenuRepository::getSubMenuInternoNivel2($rSubMenu[$j]["id_menu"], $conn);
+                        $rSubMenuInterno2 = MenuRepository::getSubMenuInternoNivel2($rSubMenu[$j]["id_menu"]);
                         for ($mi = 0; $mi < count($rSubMenuInterno2); $mi++) {
                             $menuNav .='<li class="dropdown-submenu">';
                             $menuNav .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">' . $rSubMenuInterno2[$mi]["titulo"] . '</a>' . "\n";
                             $menuNav .= '<ul class="dropdown-menu">' . "\n";
-                            $rSubMenuInterno3 = MenuRepository::getSubMenuInternoNivel3($rSubMenuInterno2[$mi]["pai"], $conn);
+                            $rSubMenuInterno3 = MenuRepository::getSubMenuInternoNivel3($rSubMenuInterno2[$mi]["pai"]);
                             for ($u = 0; $u < count($rSubMenuInterno3); $u++) {
                                 $rotaI1 = $rSubMenuInterno3[$u]["rota"];
                                 $rotaI2 = $rSubMenuInterno3[$u]["id_interno"];
@@ -169,30 +201,46 @@ class MenuRepository extends EntityRepository {
          * baseado no perfil do usuario logado.
          */
         $docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
+        file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
         //exit;
-        file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        //$docRoot = $_SERVER['DOCUMENT_ROOT'];
+        //file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        
     }
 
-    public static function getIdInterno($id_interno, $conn, $session) {
+    public static function getIdInterno($id_interno, $session) {
+
+        $conn = DBALConnection::getDBALConection();
 
         if ($id_interno != "home" && $id_interno != "logout") {
 
-            $rMenuInterno = $conn->fetchAll("SELECT mi.id_interno,mi.id_menu, mi.titulo, m.menu, mi.pai 
+            $sql = "SELECT mi.id_interno,mi.id_menu, mi.titulo, m.menu, mi.pai 
                 FROM lasasap.menu_interno mi INNER JOIN lasasap.menu m on m.id_menu = mi.id_menu 
-                WHERE (id_interno = $id_interno)");
-            
+                WHERE id_interno = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue("id", $id_interno);
+            $stmt->execute();
+            $rMenuInterno = $stmt->fetchAll();
+
             $session->set('id_interno', $rMenuInterno[0]['id_interno']);
             $session->set('menu', $rMenuInterno[0]['menu']);
             $session->set('titulo', $rMenuInterno[0]['titulo']);
-            
+
             if ($rMenuInterno[0]['pai'] != NULL) {
                 $pai = $rMenuInterno[0]['pai'];
-                $rPai = $conn->fetchAll("select titulo from lasasap.menu_interno where id_interno = $pai");
+
+                $sql2 = "select titulo from lasasap.menu_interno where id_interno = :pai";
+                $stmt = $conn->prepare($sql2);
+                $stmt->bindValue("pai", $pai);
+                $stmt->execute();
+                $rPai = $stmt->fetchAll();
+
                 $session->set('menu_pai', $rPai[0]['titulo']);
             } else {
                 $session->remove('menu_pai');
             }
         }
     }
+
 }

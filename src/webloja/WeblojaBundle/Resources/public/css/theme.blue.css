@@ -18,6 +18,7 @@
 }
 
 /* header */
+
 .tablesorter-blue th,
 .tablesorter-blue thead td {
 	font: bold 12px/18px Arial, Sans-serif;
@@ -27,6 +28,8 @@
 	padding: 4px;
 	text-shadow: 0 1px 0 rgba(204, 204, 204, 0.7);
 }
+
+
 .tablesorter-blue tbody td,
 .tablesorter-blue tfoot th,
 .tablesorter-blue tfoot td {

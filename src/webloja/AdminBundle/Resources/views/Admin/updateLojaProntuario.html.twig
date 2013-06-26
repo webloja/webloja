@@ -1,0 +1,67 @@
+{% extends "::webloja.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+<script>
+    $(function(){
+         $("#dialog").dialog({
+            autoOpen: false,
+            width: 400,
+            buttons: [
+                {
+                    text: "Ok",
+                    click: function() {
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+        $("#btnBuscaLojaProntuario").click(function(event){
+            event.preventDefault();
+            if($("#updateLojaProntuario_prontuario").val()==""){
+                $("#dialog").dialog("open").html('<br />* Informe o prontuário!');
+            }else{
+                $("#FormUpdateLojaProntuario").submit();
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% block body %}
+    <body >
+        <div id="dialog" title="Erro"></div>
+        <div class='row-fluid'>
+            <span class='span3'></span>
+            <div class='well well-small span6'>
+                {% for flashMessage in app.session.flashbag.get('notice_erro') %}
+                    <div class="flash-notice alert alert-error">
+                   {{ flashMessage }}
+                        </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('notice_sucesso') %}
+                        <div class="flash-notice alert alert-success">
+                   {{ flashMessage }}
+                            </div>
+                {% endfor %}
+                            <form class="form-horizontal" id="FormUpdateLojaProntuario" action="{{ path('UpdateLojaProntuario',{'id_interno': app.request.get('id_interno') }) }}" method="post" {{ form_enctype(form) }}>
+                    {{ form_errors(form) }}
+
+                                    <div class="control-group">
+                                        <div class="text-exception text-error">
+                                        {{ form_errors(form.prontuario) }}
+                                            </div>
+                            {{ form_label(form.prontuario,'Prontuário',{'label_attr': {'class': 'control-label'}}) }}
+
+                                            <div class="controls">
+                            {{ form_widget(form.prontuario,{ 'attr': {'class': 'span8'} } ) }}
+                                           &nbsp;<button type="submit" class="btn btn-small btn-danger" id='btnBuscaLojaProntuario'>Enviar</button>
+                                           </div>
+                                            </div>
+                    {{ form_rest(form) }}
+                      </form>
+                   </div>
+                   <span class='span3'></span>
+                </div>
+</body>
+{% endblock %}
+
+

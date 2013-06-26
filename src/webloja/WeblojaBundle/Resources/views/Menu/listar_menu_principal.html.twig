@@ -5,7 +5,8 @@
 {% block javascripts %}
     {{ parent() }}
     
-     <script type="text/javascript">
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/menu_principal.js') }}"></script>
+    <script type="text/javascript">
          
         function excluir(url)
         {
@@ -22,7 +23,6 @@
 <div class="row-fluid"> 
     <div class="span3"></div>
     <div class='span6'>
-        <div class="well well-small">
              <header class="jumbotron subhead" id="overview">
         
                 {# Exibe a messagem de salvo com sucesso #}
@@ -45,7 +45,7 @@
             </header>
                 
             <p style="text-align: right">
-                <a href="{{ path('webloja_menu_principal_salvar') }}" class="btn btn-small btn-danger"><i class="icon-plus icon-white"></i>Adicionar</a>
+                <a href="{{ path('webloja_menu_principal_salvar') }}" class="btn btn-danger btn-mini"><i class="icon-plus icon-white"></i>Adicionar</a>
             </p>
             <table class="table table-bordered table-striped" style="width:100%">
                 <thead>
@@ -53,7 +53,7 @@
                         <th width="70%" align="center">Departamento</th>
                         <th width="10%" align="center">Ordem</th>
                         <th width="10%" align="center">Status</th>
-                        <th width="10%">ação</th>
+                        <th width="10%">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,8 +83,7 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
-        
+            {{ include ('pager.html.twig') }}
     </div>
     
     <div class='span3'></div>

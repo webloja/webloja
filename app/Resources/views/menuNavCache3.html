@@ -24,7 +24,12 @@
 <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" >DOL<b class = "caret"></b></a>
 <ul class="dropdown-menu">
 <li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Onda de Devolução</a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Devolução ONDA</a>
+<ul class="dropdown-menu">
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Devolução CI</a>
 <ul class="dropdown-menu">
 </ul>
 </li>
@@ -61,6 +66,7 @@
 <li class="dropdown-submenu">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Tracking</a>
 <ul class="dropdown-menu">
+<li><a href="{{ path('ResetSenhaProntuario', {'id_interno': 284}) }}">Reset senha Prontuário</a></li>
 </ul>
 </li>
 <li class="dropdown-submenu">
@@ -119,17 +125,17 @@
 </ul>
 </li>
 <li class="dropdown-submenu">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Quebra</a>
+<ul class="dropdown-menu">
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Quebra</a>
+<ul class="dropdown-menu">
+</ul>
+</li>
+<li class="dropdown-submenu">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Inventário</a>
-<ul class="dropdown-menu">
-</ul>
-</li>
-<li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Quebra</a>
-<ul class="dropdown-menu">
-</ul>
-</li>
-<li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Quebra</a>
 <ul class="dropdown-menu">
 </ul>
 </li>
@@ -139,12 +145,12 @@
 <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" >DFI<b class = "caret"></b></a>
 <ul class="dropdown-menu">
 <li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">CREI</a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Solicitação de Numerários</a>
 <ul class="dropdown-menu">
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Solicitação de Numerários</a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">CREI</a>
 <ul class="dropdown-menu">
 </ul>
 </li>
@@ -189,12 +195,12 @@
 <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" >DVLP<b class = "caret"></b></a>
 <ul class="dropdown-menu">
 <li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Pedidos Com Nota</a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Cupom</a>
 <ul class="dropdown-menu">
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Cupom</a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Pedidos Com Nota</a>
 <ul class="dropdown-menu">
 </ul>
 </li>
@@ -248,11 +254,18 @@
 <li class="dropdown-submenu">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Cadastro de Usuários</a>
 <ul class="dropdown-menu">
+<li><a href="{{ path('AdminUsuarioNovo', {'id_interno': 50}) }}">Novo Usuário</a></li>
+<li><a href="{{ path('AdminCFUserProntuario', {'id_interno': 230}) }}">Prontuário Controle  Físico 9000</a></li>
 </ul>
 </li>
 <li class="dropdown-submenu">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown-submenu">Preferências</a>
 <ul class="dropdown-menu">
+<li><a href="{{ path('AdminUpdateSenhaUsuario', {'id_interno': 7}) }}">Alterar Senha</a></li>
+<li><a href="{{ path('AdminUpdateSenhaProntuario', {'id_interno': 235}) }}">Alterar Senha Controle Físico 9000</a></li>
+<li><a href="{{ path('UpdateLojaProntuario', {'id_interno': 349}) }}">Alterar Loja do Prontuário</a></li>
+<li><a href="{{ path('ResetSenhaProntuario', {'id_interno': 402}) }}">Reset senha Prontuário</a></li>
+<li><a href="{{ path('TrackAbastecimentoRelatorioDiario', {'id_interno': 403}) }}">Relatório diário - Abastecimento</a></li>
 </ul>
 </li>
 </ul>

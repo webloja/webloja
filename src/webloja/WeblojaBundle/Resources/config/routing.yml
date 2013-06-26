@@ -17,8 +17,8 @@ root:
         route:    principal
 
 webloja_menu_interno:
-    pattern:  /menu/interno/consultar
-    defaults: { _controller: WeblojaBundle:Menu:consultarMenuInterno}
+    pattern:  /menu/interno/consultar/{id_interno}
+    defaults: { _controller: WeblojaBundle:Menu:consultarMenuInterno, id_menu: NULL}
     
 webloja_menu_interno_salvar:
     pattern:  /menu/interno/salvar/{id}
@@ -29,17 +29,15 @@ webloja_menu_interno_excluir:
     defaults: { _controller: WeblojaBundle:Menu:excluirMenuInterno }
     
 webloja_menu_principal:
-    pattern:  /menu/principal/consultar
+    pattern:  /menu/principal/consultar/{id_interno}
     defaults: { _controller: WeblojaBundle:Menu:consultarMenuPrincipal }
     
 webloja_menu_principal_salvar:
     pattern:  /menu/principal/salvar/{id}
     defaults: { _controller: WeblojaBundle:Menu:salvarMenuPrincipal, id: NULL }
-    
-
 
 webloja_menu_consultar:
-    pattern:  /menu/consultar
+    pattern:  /menu/consultar/{id_interno}
     defaults: { _controller: WeblojaBundle:Menu:consultarMenu }
 
 webloja_menu_salvar:
@@ -51,5 +49,5 @@ webloja_menu_excluir:
     defaults: { _controller: WeblojaBundle:Menu:excluirMenu }
 
 webloja_menu_interno_consultar:
-    pattern:  /menu/interno/consultar/{id_menu}
-    defaults: { _controller: WeblojaBundle:Menu:consultarMenuInterno }
+    pattern:  /menu/interno/consultar/{id_interno}
+    defaults: { _controller: WeblojaBundle:Menu:consultarMenuInterno, id_menu: NULL}

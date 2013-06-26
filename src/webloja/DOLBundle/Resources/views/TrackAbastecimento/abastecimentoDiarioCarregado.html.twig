@@ -1,0 +1,50 @@
+{% extends "::webloja.html.twig" %} 
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/dol/js/abastecimentoDiarioCarregado.js') }}"></script>
+{% endblock %}
+{% block body %}
+<body >
+  <div id="dialog" title="Erro"></div>
+  <div class='row-fluid'>
+    <label class='text-center'><strong>Data:</strong> {{data}}</label>
+    <p class='text-right'>
+      <button class='btn btn-danger btn-mini'><i class='icon-file icon-white'></i>&nbsp;<strong>Excel</strong></button>
+    </p>
+  </div>
+  <div class='row-fluid'>
+    <table class='table-condensed table-bordered'>
+     <thead>
+      <tr>
+       <th>Loja</th>
+       <th>Placa</th>
+       <th>Transportadora</th>
+       <th>Guarita</th>
+       <th>Chegada</th>
+       <th>Sa&iacute;da</th>
+       <th>Documento</th>
+       <th>Finaliza&ccedil&atilde;o</th>
+     </tr>
+   </thead>
+   <tbody>
+    {% for i in 0..50 %}
+    <tr>
+      <td>campo1{{i}}</td>
+      <td>campo2{{i}}</td>
+      <td>campo3{{i}}</td>
+      <td>campo4{{i}}</td>
+      <td>campo5{{i}}</td>
+      <td>campo6{{i}}</td>
+      <td>campo7{{i}}</td>
+      <td>campo8{{i}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{{ include ('pager.html.twig') }}
+</div>
+</body>
+{% endblock %}

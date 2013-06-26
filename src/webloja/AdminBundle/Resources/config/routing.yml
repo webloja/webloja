@@ -1,18 +1,36 @@
 AdminUsuarioNovo:
     pattern:  /Admin/Usuario/Novo/{id_interno}
     defaults: { _controller: AdminBundle:Admin:index }
-
+    
+AdminCFUserProntuario:
+    pattern:  /Admin/CF/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:newUserProntuario }
+    
+AdminVerificaProntuario:
+    pattern:  /Admin/Verifica/Prontuario
+    defaults: { _controller: AdminBundle:Admin:verificaProntuario }
+   
 AdminUpdateSenhaUsuario:
-    pattern:  /
-    
+    pattern:  /Admin/Update/Senha/Usuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:updateSenhaUsuario }
+
 AdminUpdateSenhaProntuario:
-    pattern:  /
+    pattern:  /Admin/Update/Senha/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:updateUserProntuario }
     
-UpdateLojaProntuario:
-    pattern:  /
+AdminVerificaSenhaProntuario:
+    pattern:  /Admin/Verifica/Senha/Prontuario
+    defaults: { _controller: AdminBundle:Admin:verificaSenhaProntuario }
     
 ResetSenhaProntuario:
-    pattern:  /
+    pattern:  /Admin/Reset/Senha/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:resetSenhaProntuario }
     
-TrackAbastecimentoRelatorioDiario:
-    pattern:  /
+UpdateLojaProntuario:
+    pattern:  /Admin/Update/Loja/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:updateLojaProntuario }
+    
+NovaLojaProntuario:
+    pattern:  /Admin/Nova/Loja/Prontuario/{id_interno}
+    defaults: { _controller: AdminBundle:Admin:novaLojaProntuario }
+

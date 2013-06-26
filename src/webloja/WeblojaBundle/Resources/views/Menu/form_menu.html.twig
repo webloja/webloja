@@ -4,17 +4,33 @@
 
 {% block javascripts %}
     {{ parent() }}
-
+    
     <script type="text/javascript">
 
         $(document).ready(function(){
 
             $('#btnCancelar').click(function(){
 
-               document.location = '{{ path('webloja_menu_consultar') }}';
+               document.location = '{{ path('webloja_menu_consultar', {'id_interno': app.session.get('id_interno')}) }}';
 
             });
-
+            
+            
+            // Validação do formulário utilizando o framework nod!
+            var regras = [
+                [ '#frmMenu_menu', 'presence', 'Este campo é obrigatório!'],
+                [ '#frmMenu_menu', 'min-length:4', 'Este campo deve possuir 4 caracteres no mínimo!'],
+                [ '#frmMenu_menu', 'max-length:45', 'Este campo deve possuir 45 caracteres no máximo!'],
+                [ '#frmMenu_departamento', 'presence', 'Este campo é obrigatório!'],
+                [ '#frmMenu_ordem', 'presence', 'Este campo é obrigatório!'],
+                [ '#frmMenu_ordem', 'integer', 'Este campo deve ser um número!'],
+                [ '#frmMenu_ordem', 'min-num:0', 'O valor mínimo para este campo é 0!']
+            ];
+              
+            var options = {
+                'submitBtnSelector' : '#btnCriarUsuario'
+            };
+            $( "#frmMenu" ).nod(regras, options);
         });
     </script>
 {% endblock %}
@@ -33,7 +49,7 @@
                 </div>
             {% endif %}
             
-            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_salvar', {'id': id_menu}) : path('webloja_menu_salvar') }}" method="post" {{ form_enctype(form) }} >       
+            <form class="form-horizontal" action="{{ id_menu is not empty ? path('webloja_menu_salvar', {'id': id_menu}) : path('webloja_menu_salvar') }}" method="post" {{ form_enctype(form) }} id="frmMenu">       
                 <div class="control-group">
                     <div class="controls text-center">
                         <label class="control-label"><strong>{{ id_menu is not empty ? 'Editar' : 'Cadastrar' }} Menu</strong></label>
