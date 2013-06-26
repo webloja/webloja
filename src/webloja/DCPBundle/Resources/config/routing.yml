@@ -13,3 +13,7 @@ VerificaProntuarioControleFisico9000:
 CreateControleFisico9000:
     pattern:  /DCP/Create/Controle/Fisico/9000
     defaults: { _controller: DCPBundle:ControleFisico:createControleFisico9000 }
+    
+ConsultarQuebra:
+    pattern:  /DCP/Consultar/Quebra/{id_interno}
+    defaults: { _controller: DCPBundle:Quebra:index }

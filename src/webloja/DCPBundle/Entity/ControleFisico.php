@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ControleFisico
  *
- * @ORM\Table("controle_fisico")
+ * @ORM\Table("lasasap.controle_fisico")
  * @ORM\Entity(repositoryClass="webloja\DCPBundle\Repository\ControleFisicoRepository")
  */
 class ControleFisico

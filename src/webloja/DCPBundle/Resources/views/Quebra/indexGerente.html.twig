@@ -1,0 +1,146 @@
+{% extends "::webloja.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-datetimepicker.min.css') }}">
+{% endblock %} 
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/dol/js/indexGerente.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.mtz.monthpicker.js') }}"></script>
+<script>
+$(function() {
+    
+    //Esconder a caixa de erro:
+    $("#dialogErro").hide();
+    
+    
+    /*
+     * ALTERNANDO ENTRE OS DOIS MODOS DE VISUALIZAÇÃO DO CAMPO DATA:
+     * Todas as lojas --> seleção apenas do dia específico
+     * Loja específica --> seleção do mês desejado
+     */
+    $('#loja').change(function(){
+        
+        //Verifica se a loja selecionada foi alguma específica ou "Todas"
+        if($(this).val() == 0)
+        {
+            $('#groupMes').css('display', 'none');
+            $('#groupDia').css('display', 'block');
+        }else{
+            $('#groupDia').css('display', 'none');
+            $('#groupMes').css('display', 'block');
+        }
+        
+    });
+    
+    
+    /*
+     * CONFIGURAÇÕES NECESSÁRIAS AO CALENDÁRIO DO MÊS
+     */
+    //Obtendo as datas de dia mês e ano para usar na seleção por mês
+    var hoje = new Date();
+    var ano = hoje.getFullYear();
+    
+    //Atribuindo o calendário de mês ao input #dataMes
+    $('#dataMes').monthpicker({
+        selectedYear: ano,
+        startYear: ano - 20,
+        finalYear: ano,
+        openOnFocus: false
+    });
+    
+    
+    //Abrir mapa ao clicar no ícone ao lado do text
+    $('.month-add-on').click(function () {
+        $('#dataMes').monthpicker('show');
+    });
+    
+    
+    /*
+     * AÇÃO PARA O CLIQUE DO BOTÃO ENVIAR
+     */
+    $('#enviar').click(function(event) {
+        
+        event.preventDefault();
+        
+        if ( ($('#selecione').val() === 0 && $('#dataDia').val() === "") || ($('#dataMes').val() === ""))
+        {
+            $("#dialogErro").show();
+            $("#dialogErro").html("O campo Data não pode ficar vazio para esta consulta");
+        }else{
+            alert("Enviar informações corretamente");
+        }
+    });
+});
+</script>
+{% endblock %}
+{% block body %}
+  <body >
+    <div id="dialogErro" class="alert alert-error"></div>
+    <div class="row-fluid">
+        <span class="span3"></span>
+        
+        <div class="well well-small span6">
+            
+            {% for flashMessage in app.session.flashbag.get('notice_error') %}
+                <div class="flash-notice alert alert-error">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            
+            {% for flashMessage in app.session.flashbag.get("notice_sucesso") %}
+                <div class="flash-notice alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            
+            <form class="form-horizontal" id="FormQuebra" action="" method="post">
+                <div class="control-group">
+                    <label class="control-label">Loja</label>
+                    <div class="controls">
+                        <select class="span6" name="loja" id="loja">
+                            <option name="selecione" id="selecione" value="0" selected>Todas</option>
+                            {% for i in loja %}
+                                <option name="" id="" value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group" id="groupDia">
+                    <label class='control-label'>Data Dia</label>
+                    <div class="controls">
+                        <div id="data_dia" class="input-append date">
+                            <input id='dataDia' name='dataDia' class='span12' data-format="dd/MM/yyyy" type="text"></input>
+                            <span class="add-on" id='i_data'>
+                                <i class="icon-calendar" ></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group" id="groupMes" style="display: none;">
+                    <label class='control-label'>Data Mês</label>
+                    <div class="controls">
+                        <div id="data_mes_ano" class="input-append date">
+                            <input id='dataMes' name='dataMes' class='span21' data-format="MM/yyyy" type="text"></input>
+                            <span class="month-add-on" id='ma_data'>
+                                <i class="icon-calendar" id="iconeCalendario"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class='text-center'>
+                    <button type="submit" class="btn btn-small btn-danger" id='enviar'>Enviar</button>
+                </div>
+                
+            </form>
+            
+            
+        </div>
+        
+        <span class='span3'></span>
+    </div>
+  </body>
+{% endblock %}
