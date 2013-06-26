@@ -5,7 +5,7 @@ namespace webloja\WeblojaBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use webloja\LIB\DBALConnection;
 
-class MenuRepository {
+class MenuRepository extends EntityRepository {
 
     //Função para remover repetição do menu
     private static function removeRepeticao($vetor) {
@@ -18,8 +18,8 @@ class MenuRepository {
             }
         }
         return $vetorLimpo;
-class MenuRepository extends EntityRepository {
-
+    }
+    
     public function listarMenus()
     {
         $em = $this->getEntityManager();
@@ -56,7 +56,7 @@ class MenuRepository extends EntityRepository {
         $query = $em->createQuery($dql);
         
         return $query->getResult();
-    }    }
+    }
     
     public static function getMenu($id_perfil) {
 
