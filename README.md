@@ -1,7 +1,7 @@
 DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
 ===============================
 
-** CAMADA VIEW
+** TESTE DE CONFLITO
 --------------
   - Esta sendo usado o Twitter-Bootstrap para desenhar as telas.
   - Realizando integração com Twig do próprio Symfony 2.
