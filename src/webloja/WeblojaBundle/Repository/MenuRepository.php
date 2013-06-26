@@ -6,6 +6,19 @@ use webloja\LIB\DBALConnection;
 
 class MenuRepository {
 
+    //Função para remover repetição do menu
+    private static function removeRepeticao($vetor) {
+        $vetorLimpo = Array();
+        $cont = 0;
+        foreach($vetor as $item) {
+            if (!in_array($item, $vetorLimpo)) {
+                $vetorLimpo[$cont] = $item;
+                $cont++;
+            }
+        }
+        return $vetorLimpo;
+    }
+    
     public static function getMenu($id_perfil) {
 
         $conn = DBALConnection::getDBALConection();
@@ -19,7 +32,8 @@ class MenuRepository {
         $stmt->bindValue("id_perfil",$id_perfil);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $menu = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $menu;
         
     }
 
@@ -34,7 +48,8 @@ class MenuRepository {
         $stmt->bindValue("id_perfil",$id_perfil);
         $stmt->bindValue("id_departamento",$id_departamento);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenu = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenu;
         
     }
 
@@ -52,7 +67,8 @@ class MenuRepository {
         $stmt->bindValue("id_menu",$id_menu);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenuInterno = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenuInterno;
     }
 
     public static function getSubMenuInternoNivel2($id_menu) {
@@ -66,20 +82,22 @@ class MenuRepository {
         $stmt->bindValue("id_menu",$id_menu);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenuInternoNivel2 = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenuInternoNivel2;
 
     }
 
     public static function getSubMenuInternoNivel3($id_pai) {
 
         $conn = DBALConnection::getDBALConection();
-        $sql = "SELECT SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
+        $sql = "SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
             WHERE pai = :id_pai AND ativo = :ativo";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id_pai",$id_pai);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenuInternoNivel3 = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenuInternoNivel3;
 
     }
 
@@ -100,6 +118,7 @@ class MenuRepository {
 
             //subMenu
             $rSubMenu = MenuRepository::getSubMenu($rMenu[$i]["id_departamento"], $id_perfil);
+            
             $menuNav .= '<ul class="dropdown-menu">' . "\n";
             for ($j = 0; $j < count($rSubMenu); $j++) {
                 $menuNav .= '<li class="dropdown-submenu">' . "\n";
@@ -166,7 +185,8 @@ class MenuRepository {
         //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
         //exit;
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
-        file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        //file_put_contents($docRoot . "/weblojaAptana/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        file_put_contents($docRoot . "/sap/novo/webloja_novo/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         
     }
 
