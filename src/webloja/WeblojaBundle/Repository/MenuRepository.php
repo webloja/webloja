@@ -4,7 +4,7 @@ namespace webloja\WeblojaBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use webloja\LIB\DBALConnection;
-
+ 
 class MenuRepository extends EntityRepository {
 
     //Função para remover repetição do menu
