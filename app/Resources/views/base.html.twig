@@ -4,8 +4,9 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/segundo/css/theme.blue.css') }}">
-        <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/segundo/css/theme.jui.css') }}"> 
+            <link rel="stylesheet" href="{{ asset('bundles/segundo/css/theme.blue.css') }}">
+            <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/segundo/css/theme.jui.css') }}"> 
+            
         {% endblock %} 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -45,6 +46,7 @@
                             filter_startsWith: false
                         }
                     });
+                    
                 });
                 </script> 
         {% endblock %}

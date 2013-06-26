@@ -1,10 +1,11 @@
 $(function(){
-  
-  $("#tableNcarregados").tablesorter({
+
+  $("table").tablesorter({
     theme: 'blue',
     widthFixed: true,
     widgets: ["zebra", "filter"],
     headers: {
+        2:{filter:false},
         3:{filter:false},
         4:{filter:false},
         5:{filter:false},
@@ -18,7 +19,9 @@ $(function(){
       filter_reset : '.reset',
       filter_searchDelay : 300,
       filter_startsWith  : false,
+      filter_hideFilters : false,
       filter_functions : {
+        0 : false
       }
     }
   }).tablesorterPager(
@@ -30,5 +33,5 @@ $(function(){
     size: 10,
     fixedHeight: false
   });
-  
+
 });

@@ -2,6 +2,7 @@
 
 namespace webloja\WeblojaBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 use webloja\LIB\DBALConnection;
 
 class MenuRepository {
@@ -17,7 +18,45 @@ class MenuRepository {
             }
         }
         return $vetorLimpo;
+class MenuRepository extends EntityRepository {
+
+    public function listarMenus()
+    {
+        $em = $this->getEntityManager();
+        $dql = 'SELECT m, d FROM WeblojaBundle:Menu m JOIN m.departamento d ORDER BY m.menu ASC';
+        $query = $em->createQuery($dql);
+        
+        return $query->getResult();
     }
+    
+    public function listarMenusInternos($id_menu)
+    {
+        $em = $this->getEntityManager();
+        $dql = '';
+        $query = '';
+        if (is_null($id_menu))
+        {
+            $dql = 'SELECT m, a FROM WeblojaBundle:MenuInterno m JOIN m.menu a ORDER BY m.titulo ASC';
+            $query = $em->createQuery($dql);
+        }
+        else
+        {
+            $dql = 'SELECT m, a FROM WeblojaBundle:MenuInterno m JOIN m.menu a WHERE m.id_menu = :menu ORDER BY m.titulo ASC';
+            $query = $em->createQuery($dql);
+            $query->setParameter('menu', $id_menu);
+        }
+        
+        return $query->getResult();
+    }
+    
+    public function listarMenuPrincipal()
+    {
+        $em = $this->getEntityManager();
+        $dql = 'SELECT d FROM WeblojaBundle:MenuDepartamento d ORDER BY d.departamento ASC';
+        $query = $em->createQuery($dql);
+        
+        return $query->getResult();
+    }    }
     
     public static function getMenu($id_perfil) {
 
@@ -31,7 +70,6 @@ class MenuRepository {
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id_perfil",$id_perfil);
         $stmt->bindValue("ativo",1);
-        $stmt->execute();
         $menu = MenuRepository::removeRepeticao($stmt->fetchAll());
         return $menu;
         
@@ -180,13 +218,12 @@ class MenuRepository {
          * Recuperando o DOCUMENT_ROOT do servidor e criando o arquivo de menu
          * baseado no perfil do usuario logado.
          */
-        //$docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
-        //file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        $docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
+        file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
         //exit;
-        $docRoot = $_SERVER['DOCUMENT_ROOT'];
-        //file_put_contents($docRoot . "/weblojaAptana/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
-        file_put_contents($docRoot . "/sap/novo/webloja_novo/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        //$docRoot = $_SERVER['DOCUMENT_ROOT'];
+        //file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         
     }
 

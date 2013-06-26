@@ -5,6 +5,16 @@
     <title>{% block title %}WebLoja{% endblock %}</title>
     {% block stylesheets %}
 
+<<<<<<< HEAD
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.blue.css') }}">
+        <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.jui.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/ui-lightness/jquery-ui-1.10.3.custom.css') }}">
+        <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/webloja/css/datatables.bootstrap.css') }}"> 
+{% endblock %} 
+=======
     <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.blue.css') }}">
@@ -14,20 +24,54 @@
     <link rel="stylesheet" href="{{ asset('bundles/webloja/css/ui-lightness/jquery-ui-1.10.3.custom.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-datetimepicker.min.css') }}">
     {% endblock %} 
+>>>>>>> ed8c918a2a1a3977b95a0e690910f931286b1314
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-    {% block javascripts %}
-    
+<<<<<<< HEAD
+{% block javascripts %}
         <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery-ui-1.10.3.custom.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/webloja/addons/pager/jquery.tablesorter.pager.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.widgets.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap-datetimepicker.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/webloja/js/webloja.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/webloja/js/nod.min.js') }}"></script>
+{% endblock %}
+        </head>
+        <body>
+            <div id="wrapper">
+{% block header %}
+                    <div class="row-fluid">
+                        <div class='header span12'>
+                            <div class="span4" style='margin-top: 10px;'>
+                                &nbsp;&nbsp;<img src="{{ asset('bundles/webloja/images/header_logo.jpg') }}" />
+                                &nbsp;&nbsp;<img style='width: 65px; height: 65px; ' src="{{ asset('bundles/webloja/images/webLoja.png') }}" /> 
+                            </div>
+                            <div class="span5"></div>
+                            <div class="span3" style="margin-top: 10px;">                         
+{% if not app.session.get('id_user') %}
+                                    <div></div>
+{% else %}
+                                    <div class='alert alert-error'>
+                        {{app.session.get('boasVindas')}}
+                                            <div class='text-right'>
+                                                <a href="{{ path('logout') }}" class="btn btn-danger btn-mini"><i class='icon-remove icon-white'></i>&nbsp;Sair</a>
+                                            </div>    
+                                        </div>
+{% endif %}                    
+                                    </div>
+                                </div>
+                            </div>
+=======
+    {% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery-ui-1.10.3.custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/addons/pager/jquery.tablesorter.pager.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.widgets.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/webloja.js') }}"></script>
+>>>>>>> ed8c918a2a1a3977b95a0e690910f931286b1314
 
     {% endblock %}
 </head>

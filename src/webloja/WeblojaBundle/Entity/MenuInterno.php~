@@ -27,7 +27,7 @@ class MenuInterno
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="Menu", inversedBy="menusInternos")
-     * @ORM\JoinColumn(name="id_menu", referencedColumnName="id_menu", nullable=false)
+     * @ORM\JoinColumn(name="id_menu", referencedColumnName="id", nullable=false)
      * @Assert\NotBlank(message="Campo obrigatório")
      */
     protected $menu;
@@ -53,7 +53,7 @@ class MenuInterno
      *
      * @ORM\Column(name="ordem", type="integer", nullable=true)
      * @Assert\NotBlank(message="Campo obrigatório")
-     * @Assert\Range(invalidMessage="Campo não é número", max="999", maxMessage="O valor deve ser menor que 1000", min="0", minMessage="O valor mínimo é 0")
+     * @Assert\Range(invalidMessage="Campo não é número", max="999", maxMessage="O valor deve ser menor que 1000", min="1", minMessage="O valor mínimo é 1")
      */
     private $ordem;
     
@@ -61,7 +61,8 @@ class MenuInterno
      * @var integer
      *
      * @ORM\Column(name="ativo", type="boolean")
-     * @Assert\choice(choices = {"0", "1"}, message = "Esse campo só admite verdadeiro ou falso, 1 ou 0")
+     * @Assert\NotBlank(message="Campo obrigatório")
+     * @Assert\Range(invalidMessage="Campo não é número", max="1", maxMessage="O campo deve ser 0 ou 1", min="0", minMessage="O campo deve ser 0 ou 1")
      */
     private $ativo;
 
@@ -70,7 +71,7 @@ class MenuInterno
      *
      * @ORM\Column(name="permissao", type="smallint")
      * @Assert\NotBlank(message="Campo obrigatório")
-     * @Assert\choice(choices = {"0", "1", "2"}, message = "Esse campo só admite os valores 0, 1 e 2")
+     * @Assert\Range(invalidMessage="Campo não é número", max="100", maxMessage="O campo deve ser menor que 100", min="1", minMessage="O campo maior que 0")
      */
     private $permissao;
     
@@ -78,7 +79,8 @@ class MenuInterno
      * @var string
      *
      * @ORM\Column(name="rota", type="string", length=50, nullable=true)
-     * @Assert\Length(min=4, max=50, minMessage="A rota deve possuir {{ limit }} caracteres no mínimo", maxMessage="A rota deve possuir {{ limit }} caracteres no máximo")
+     * @Assert\Range(invalidMessage="Campo não é número", max="100", maxMessage="O campo deve ser menor que 100", min="1", minMessage="O campo maior que 0")
+     * @Assert\Length(min=4, max=45, minMessage="A rota deve possuir {{ limit }} caracteres no mínimo", maxMessage="A rota deve possuir {{ limit }} caracteres no máximo")
      */
     private $rota;
     
@@ -87,7 +89,7 @@ class MenuInterno
      * @var integer
      *
      * @ORM\Column(name="pai", type="integer", nullable=true)
-     * @Assert\NotBlank(message="Campo obrigatório")
+     * @Assert\Range(invalidMessage="Campo não é um número inteiro positivo", min=1, max=500, minMessage="A rota deve possuir {{ limit }} caracteres no mínimo", maxMessage="A rota deve possuir {{ limit }} caracteres no máximo")
      */
     private $pai;
 
