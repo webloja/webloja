@@ -3,27 +3,25 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
 
 ** TESTE DE CONFLITO
 --------------
-  - Esta sendo usado o Twitter-Bootstrap para desenhar as telas.
-  - Realizando integração com Twig do próprio Symfony 2.
+  - Esta sasdasdasdas
 
-** PADRÕES DO SISTEMA
-----------------------
-	- Formatação dos butões do sistema:
-	- class='btn btn-danger btn-mini', estão sendo usados também nos botões os icones do bootstrab.
-
-** LOGIN DO SISTEMA
--------------------
-  - Esta sendo o feito o mesmo que o webloja atual, com adaptações para integrar-se com o symfony.
-
-** ORGANIZAÇÃO DO SISTEMA
---------------------------
- - O sistema esta organizado em Bundles, onde cada Departamento que intitula um menu principal forma um Bundle, possuindo também um Bundle geral onde são colocados os programas e códigos que são usados por todos os outros Bundles.
-
-** BUNDLES
-----------
-  - AdminBundle: Aqui são colocados os programas ´referentes a parte administrativa do sistema webloja.
-  - ChamadosBundle: Programas do modulo de apertura de chamados.
-  - DABundle: Programas usados pelo departamento DA.
+asd
+as
+d
+as
+da
+sdf
+sd
+fo webloja atual, com adaptações para integrar-se com o symfony.
+ds
+f
+sd
+fsd
+f
+sdf
+sd
+fsd
+f - DABundle: Programas usados pelo departamento DA.
   - DCM: Programas usados pelo departamento DCM.
   - DCP: Programas usados pelo departamento DCP.
   - DFI: Programas usados pelo departamento DFI.
@@ -49,13 +47,12 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
          * codigo referente ao controle de sessão da pagina
          * este código deve ser colocado em todos os controllers
          * nos metodos que reenderizam formulários
-         */
-        $session = $this->getRequest()->getSession();
+         */sdfsdfsdf
+        $session = $thissdfsdfsd->getRequest()->getSession();
         if(!$session->get('id_user')){
             
-             $this->get('session')->getFlashBag()->add('notice', "Efetue o login para entrar no sistema!");
-             return $this->redirect($this->generateUrl('logout'));
-        }
+             $this->get('sfsdfession')->getFlashBag()->add('notice', "Efetue o login para entrar no sistema!");
+             return $this->fsdfsdf
         /*******************************************************/
         
         /**
@@ -67,18 +64,15 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
              MenuRepository::getIdInterno($id_interno,$session);
         }
    - Biblioteca ExcelWriter.php
-        - Foi nescessário criar uma nova biblioteca para gerar arquivos .xls(Excel).
-
-            É uma classe simples , que faz a leitura de uma tabela html,
-            a classe é composta pelos metodos:
-
-            - setNameArquivo($arquivo): Recebe como parametro no nome do arquivo.
-
-            - createTituloCol($valor): Cria a linha contendo os lables de cada coluna, recebe como parametro
-              o nome dessa coluna.
-
-            - createCol($linha, $valor): Cria as linhas e colunas referentes ao conteudo da planilha.
-
+     
+sdf
+sd
+f
+sdf
+sd
+fsd
+fsd
+f
             - createArquivo(): Monta o arquivo .xls.
 
             - gerarExcel(): executa o metodo privado createArquivo(), para gerar o arquivo .xls.
@@ -88,23 +82,33 @@ DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
 ==========
 código js
 ==========
-$(document).ready(function() {
+$(docume
+sdf
 
-    $("#dialog").dialog({
-        autoOpen: false,
-        width: 400,
-        buttons: [
-            {
-                text: "Ok",
+sdf
+sd
+fsd
+f
+sdf
+sd
+fsd
                 click: function() {
-                    $(this).dialog("close");
+                    $(this).dialog
+sd
+f
+sdf
+sd
+fsd("close");
+sd
+fs
+dfsdf
                 }
             }
         ]
     });
 
     $("#componente").click(function(event) {
-       event.preventDefault();
+       event.preventDefausdfsdfsdlt();
        ....
             $("#dialog").dialog("open").html('<br /> Texto que vai aparecer no alert!');        
     });
@@ -118,16 +122,11 @@ código na pagina html
 
 ** FORMATAÇÃO DOS CAMPOS DATA COM ALENDÁRIO
 
- - adcionar o codigo na área de java script da pagina
-
-<script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap-datetimepicker.min.js') }}"></script>
+ - adcionar o codigo na área de java scrfpt da pagina
+sdfsdfsdfsd src="{{ asset('bundles/wfsdfebloja/fsdfsdfjs/bootstrap-datetimepicker.min.js') }}"></script>
 
  - configuração na página js
-
- $('#data_dia').datetimepicker({
-        pickTime: false,
-        maskInput: true
-});
+sdfsdfsdf
 
  - para outras configurações acessar o site: 
  
