@@ -1,6 +1,6 @@
 DOCUMENTAÇÃO INICIAL DO WEBLOJA V.1.0
 ===============================
-
+ 
 ** PADRÕES DO SISTEMA
 ----------------------
 	- Formatação dos butões do sistema:
