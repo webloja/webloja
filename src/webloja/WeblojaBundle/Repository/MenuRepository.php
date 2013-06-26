@@ -73,7 +73,7 @@ class MenuRepository {
     public static function getSubMenuInternoNivel3($id_pai) {
 
         $conn = DBALConnection::getDBALConection();
-        $sql = "SELECT SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
+        $sql = "SELECT id_interno, titulo, rota FROM lasasap.menu_interno 
             WHERE pai = :id_pai AND ativo = :ativo";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id_pai",$id_pai);
@@ -166,7 +166,8 @@ class MenuRepository {
         //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
         //exit;
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
-        file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        //file_put_contents($docRoot . "/weblojaAptana/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        file_put_contents($docRoot . "/sap/novo/webloja_novo/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         
     }
 

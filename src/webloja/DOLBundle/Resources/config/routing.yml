@@ -1,4 +1,11 @@
+ExcelNaoCarregados:
+    pattern:  /GerarExcel/Abastecimento/Nao/Carregados
+    defaults: { _controller: DOLBundle:TrackAbastecimento:excelNaoCarregados }
+
 TrackAbastecimentoRelatorioDiario:
     pattern:  /Track/Abastecimento/Relatorio/Diario/{id_interno}
     defaults: { _controller: DOLBundle:TrackAbastecimento:relatorioAbastecimentoDiario }
-
+    
+ExcelCarregados:
+    pattern:  /GerarExcel/Abastecimento/Carregados
+    defaults: { _controller: DOLBundle:TrackAbastecimento:excelCarregados }
