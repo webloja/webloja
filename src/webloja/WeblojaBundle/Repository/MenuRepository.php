@@ -210,7 +210,12 @@ class MenuRepository {
 //fim do menu departamentos
 
         $menuNav .= '</ul>' . "\n";
-        $menuNav .= '<input type="text" class="search-query pull-right" placeholder="Pesquisar">';
+        $menuNav .= '<div class="pull-right">
+                        <input type="text" class="search-query" placeholder="Pesquisar">
+                        <span class="add-on">
+                            <a href="#" id="pesquisarIcon"><i class="icon-search"></i></a>
+                        </span>
+                    </div>';
         $menuNav .= '</div>' . "\n";
         $menuNav .= '</div>' . "\n";
         $menuNav .= '</div>';
