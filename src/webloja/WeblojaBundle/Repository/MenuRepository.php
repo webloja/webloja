@@ -211,10 +211,10 @@ class MenuRepository {
 
         $menuNav .= '</ul>' . "\n";
         //Caixa de texto de pesquisa
-        $menuNav .= '<div class="input-append pull-right">
+        $menuNav .= '<div class="input-append pull-right" style="margin-bottom:0px;">
                         <input type="text" class="search-query" placeholder="Pesquisar...">
                         <a href="#" id="pesquisarIcon">
-                            <span class="add-on" style="margin-left: -11px; width:25px;">
+                            <span class="add-on" style="margin-left: -11px; width:25px; border-radius:0px 15px 15px 0px;">
                                 <i class="icon-search"></i>
                             </span>
                         </a>
