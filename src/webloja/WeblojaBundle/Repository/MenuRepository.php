@@ -210,6 +210,7 @@ class MenuRepository {
 //fim do menu departamentos
 
         $menuNav .= '</ul>' . "\n";
+        //Caixa de texto de pesquisa
         $menuNav .= '<div class="input-append pull-right">
                         <input type="text" class="search-query" placeholder="Pesquisar...">
                         <a href="#" id="pesquisarIcon">
