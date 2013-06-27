@@ -2,10 +2,9 @@
 
 namespace webloja\WeblojaBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use webloja\LIB\DBALConnection;
- 
-class MenuRepository extends EntityRepository {
+
+class MenuRepository {
 
     //Função para remover repetição do menu
     private static function removeRepeticao($vetor) {
@@ -20,7 +19,7 @@ class MenuRepository extends EntityRepository {
         return $vetorLimpo;
     }
     
-    public function listarMenus()
+	public function listarMenus()
     {
         $em = $this->getEntityManager();
         $dql = 'SELECT m, d FROM WeblojaBundle:Menu m JOIN m.departamento d ORDER BY m.menu ASC';
@@ -57,7 +56,7 @@ class MenuRepository extends EntityRepository {
         
         return $query->getResult();
     }
-    
+	
     public static function getMenu($id_perfil) {
 
         $conn = DBALConnection::getDBALConection();
@@ -70,6 +69,7 @@ class MenuRepository extends EntityRepository {
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id_perfil",$id_perfil);
         $stmt->bindValue("ativo",1);
+        $stmt->execute();
         $menu = MenuRepository::removeRepeticao($stmt->fetchAll());
         return $menu;
         
@@ -210,6 +210,7 @@ class MenuRepository extends EntityRepository {
 //fim do menu departamentos
 
         $menuNav .= '</ul>' . "\n";
+        $menuNav .= '<input type="text" class="search-query pull-right" placeholder="Pesquisar">';
         $menuNav .= '</div>' . "\n";
         $menuNav .= '</div>' . "\n";
         $menuNav .= '</div>';
@@ -218,12 +219,13 @@ class MenuRepository extends EntityRepository {
          * Recuperando o DOCUMENT_ROOT do servidor e criando o arquivo de menu
          * baseado no perfil do usuario logado.
          */
-        $docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
-        file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        //$docRoot = dirname($_SERVER['DOCUMENT_ROOT']);
+        //file_put_contents($docRoot . "/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         //echo $docRoot . "/app/Resources/views/menuNavCache$id_perfil.html";
         //exit;
-        //$docRoot = $_SERVER['DOCUMENT_ROOT'];
-        //file_put_contents($docRoot . "/webloja/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        $docRoot = $_SERVER['DOCUMENT_ROOT'];
+        //file_put_contents($docRoot . "/weblojaAptana/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
+        file_put_contents($docRoot . "/sap/novo/webloja_novo/app/Resources/views/menuNavCache$id_perfil.html", $menuNav);
         
     }
 
