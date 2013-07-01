@@ -1,0 +1,65 @@
+{% extends "::webloja.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/dol/js/index.js') }}"></script>
+<script>
+$(function() {
+    
+    $("#dialogErro").hide();
+    
+    $('#anoDeQuebra').change(function(){
+        //Se o valor do select for "zero" significa que foi selecionado a linha
+        //padrão "selecione"
+        if ($(this).val() != 0)
+        {
+            var ano = $(this).val();
+
+            //Apenas Testando...
+            alert('Ano selecionado:' + ano);
+        }
+    });
+    
+});
+</script>
+{% endblock %}
+{% block body %}
+  <body >
+    <div class="row-fluid">
+        <span class="span3"></span>
+        
+        <div class="well well-small span6">
+            <div id="dialogErro" class="alert alert-error"></div>
+            
+            {% for flashMessage in app.session.flashbag.get('notice_error') %}
+                <div class="flash-notice alert alert-error">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            
+            {% for flashMessage in app.session.flashbag.get("notice_sucesso") %}
+                <div class="flash-notice alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            
+            <form class="form-horizontal" id="FormQuebra" action="" method="post">
+                <div class="control-group">
+                    <label class="control-label">Ano</label>
+                    <div class="controls">
+                        <select class="span6" name="anoDeQuebra" id="anoDeQuebra">
+                            <option name="selecione" id="selecione" value="0" selected>Selecione</option>
+                            {% for i in ano %}
+                                <option name="" id="" value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </form>
+            
+            
+        </div>
+        
+        <span class='span3'></span>
+    </div>
+  </body>
+{% endblock %}
