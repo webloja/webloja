@@ -5,9 +5,22 @@ namespace webloja\WeblojaBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use webloja\LIB\DBALConnection;
 
-class MenuRepository extends EntityRepository {
+class MenuRepository {
 
-    public function listarMenus()
+    //Função para remover repetição do menu
+    private static function removeRepeticao($vetor) {
+        $vetorLimpo = Array();
+        $cont = 0;
+        foreach($vetor as $item) {
+            if (!in_array($item, $vetorLimpo)) {
+                $vetorLimpo[$cont] = $item;
+                $cont++;
+            }
+        }
+        return $vetorLimpo;
+    }
+    
+	public function listarMenus()
     {
         $em = $this->getEntityManager();
         $dql = 'SELECT m, d FROM WeblojaBundle:Menu m JOIN m.departamento d ORDER BY m.menu ASC';
@@ -58,7 +71,8 @@ class MenuRepository extends EntityRepository {
         $stmt->bindValue("id_perfil",$id_perfil);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $menu = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $menu;
         
     }
 
@@ -73,7 +87,8 @@ class MenuRepository extends EntityRepository {
         $stmt->bindValue("id_perfil",$id_perfil);
         $stmt->bindValue("id_departamento",$id_departamento);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenu = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenu;
         
     }
 
@@ -91,7 +106,8 @@ class MenuRepository extends EntityRepository {
         $stmt->bindValue("id_menu",$id_menu);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenuInterno = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenuInterno;
     }
 
     public static function getSubMenuInternoNivel2($id_menu) {
@@ -105,7 +121,8 @@ class MenuRepository extends EntityRepository {
         $stmt->bindValue("id_menu",$id_menu);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenuInternoNivel2 = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenuInternoNivel2;
 
     }
 
@@ -118,7 +135,8 @@ class MenuRepository extends EntityRepository {
         $stmt->bindValue("id_pai",$id_pai);
         $stmt->bindValue("ativo",1);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $subMenuInternoNivel3 = MenuRepository::removeRepeticao($stmt->fetchAll());
+        return $subMenuInternoNivel3;
 
     }
 
@@ -139,6 +157,7 @@ class MenuRepository extends EntityRepository {
 
             //subMenu
             $rSubMenu = MenuRepository::getSubMenu($rMenu[$i]["id_departamento"], $id_perfil);
+            
             $menuNav .= '<ul class="dropdown-menu">' . "\n";
             for ($j = 0; $j < count($rSubMenu); $j++) {
                 $menuNav .= '<li class="dropdown-submenu">' . "\n";
@@ -192,6 +211,15 @@ class MenuRepository extends EntityRepository {
 //fim do menu departamentos
 
         $menuNav .= '</ul>' . "\n";
+        //Caixa de texto de pesquisa
+        $menuNav .= '<div class="input-append pull-right" style="margin-bottom:0px;">
+                        <input type="text" class="search-query" placeholder="Pesquisar...">
+                        <a href="#" id="pesquisarIcon">
+                            <span class="add-on" style="margin-left: -11px; width:25px; border-radius:0px 15px 15px 0px;">
+                                <i class="icon-search"></i>
+                            </span>
+                        </a>
+                    </div>';
         $menuNav .= '</div>' . "\n";
         $menuNav .= '</div>' . "\n";
         $menuNav .= '</div>';

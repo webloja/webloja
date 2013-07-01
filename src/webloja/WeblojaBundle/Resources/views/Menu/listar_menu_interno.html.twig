@@ -1,0 +1,93 @@
+{% extends '::webloja.html.twig' %}
+
+{% block title %} Listar Menu Interno - WebLoja! {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+     <script type="text/javascript" src="{{ asset('bundles/webloja/js/menu_interno.js') }}"></script>
+     <script type="text/javascript">
+         
+        function excluir(url)
+        {
+            if(!confirm('Deseja realmente excluir o registro selecionado ?'))
+                return false;
+
+            document.location = url;
+        }
+    </script>
+
+{% endblock %}
+
+{% block body %} 
+<div class="row-fluid"> 
+        <header class="jumbotron subhead" id="overview">
+
+           {# Exibe a messagem de salvo com sucesso #}
+           {% for flashMessage in app.session.flashbag.get('success') %}
+               <div class="alert alert-success">
+                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                   {{ flashMessage | raw}}
+               </div>
+           {% endfor %}
+
+           {% for flashMessage in app.session.flashbag.get('error') %} 
+               <div class="alert alert-error">
+                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                   {{ flashMessage | raw }}
+               </div>
+           {% endfor %}
+
+        </header>
+
+        <p style="text-align: right">
+           <a href="{{ path('webloja_menu_interno_salvar') }}" class="btn btn-danger btn-mini"><i class="icon-plus icon-white"></i>Adicionar</a>
+        </p>
+        <table class="table-condensed table-bordered" style="width:100%">
+           <thead>
+               <tr>
+                   <th width="20%" align="center">Titulo</th>
+                   <th width="25%" align="center">Menu</th>
+                   <th width="25%" align="center">Link</th>
+                   <th width="15%" align="center">Rota</th>
+                   <th width="5%" align="center">Ordem</th>
+                   <th width="5%" align="center">Status</th>
+                   <!-- <th width="1%0" align="center">Permissão</th>
+                   <th width="1%0" align="center">Pai</th> -->
+                   <th width="5%">Ação</th>
+               </tr>
+           </thead>
+           <tbody>
+           {% for menu in menus %}
+               {% if menu.ativo == 1 %}
+                   {% set status = '<span style="color: green">Ativo</span>' %}
+               {% else %}
+                   {% set status = '<span style="color: red">Inativo</span>' %}
+               {% endif %}
+               <tr>
+                   <td>{{ menu.titulo }}</td>
+                   <td>{{ menu.menu.menu }}</td>
+                   <td>{{ menu.link }}</td>
+                   <td>{{ menu.rota }}</td>
+                   <td>{{ menu.ordem }}</td>
+                   <td>{{ status | raw }}</td>
+                   <td>
+                       <a href="{{ path('webloja_menu_interno_salvar', {'id': menu.id}) }}" title="Editar registro"><i class="icon-pencil"></i></a>
+                       <a class="remover" href="javascript: void(0);" onclick="excluir('{{ path('webloja_menu_interno_excluir', {'id': menu.id}) }}');" title="Remover registro"><i class="icon-remove"></i></a>
+                   </td>
+               </tr>
+           {% else %}
+
+               <tr>
+                   <td colspan="7">Não há menus internos cadastrados</td>
+               </tr>
+
+           {% endfor %}
+           </tbody>
+        </table>
+        {{ include ('pager.html.twig') }}
+</div>
+
+{% endblock %}
