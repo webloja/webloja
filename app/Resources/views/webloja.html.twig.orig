@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8" />
+    <title>{% block title %}WebLoja{% endblock %}</title>
+    {% block stylesheets %}
+
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.blue.css') }}">
+        <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.jui.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/webloja/css/ui-lightness/jquery-ui-1.10.3.custom.css') }}">
+        <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/webloja/css/datatables.bootstrap.css') }}"> 
+{% endblock %} 
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.blue.css') }}">
+    <link class="ui-theme" rel="stylesheet" href="{{ asset('bundles/webloja/css/theme.jui.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/addons/pager/jquery.tablesorter.pager.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/css/ui-lightness/jquery-ui-1.10.3.custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/webloja/css/bootstrap-datetimepicker.min.css') }}">
+    {% endblock %} 
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+{% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery-ui-1.10.3.custom.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.widgets.js') }}"></script>
+{% endblock %}
+        </head>
+        <body>
+            <div id="wrapper">
+{% block header %}
+                    <div class="row-fluid">
+                        <div class='header span12'>
+                            <div class="span4" style='margin-top: 10px;'>
+                                &nbsp;&nbsp;<img src="{{ asset('bundles/webloja/images/header_logo.jpg') }}" />
+                                &nbsp;&nbsp;<img style='width: 65px; height: 65px; ' src="{{ asset('bundles/webloja/images/webLoja.png') }}" /> 
+                            </div>
+                            <div class="span5"></div>
+                            <div class="span3" style="margin-top: 10px;">                         
+{% if not app.session.get('id_user') %}
+                                    <div></div>
+{% else %}
+                                    <div class='alert alert-error'>
+                        {{app.session.get('boasVindas')}}
+                                            <div class='text-right'>
+                                                <a href="{{ path('logout') }}" class="btn btn-danger btn-mini"><i class='icon-remove icon-white'></i>&nbsp;Sair</a>
+                                            </div>    
+                                        </div>
+{% endif %}                    
+                                    </div>
+                                </div>
+                            </div>
+    {% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery-ui-1.10.3.custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/addons/pager/jquery.tablesorter.pager.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/jquery.tablesorter.widgets.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/webloja/js/webloja.js') }}"></script>
+
+    {% endblock %}
+</head>
+<body>
+    <div id="wrapper">
+        {% block header %}
+        <div class="row-fluid">
+            <div class='header span12'>
+                <div class="span4" style='margin-top: 10px;'>
+                    &nbsp;&nbsp;<img src="{{ asset('bundles/webloja/images/header_logo.jpg') }}" />
+                    &nbsp;&nbsp;<img style='width: 65px; height: 65px; ' src="{{ asset('bundles/webloja/images/webLoja.png') }}" />
+                </div>
+                <div class="span5"></div>
+                <div class="span3" style="margin-top: 10px;">
+                    {% if not app.session.get('id_user') %}
+                    <div></div>
+                    {% else %}
+                    <div class='alert alert-error'>
+                        {{app.session.get('boasVindas')}}
+                        <div class='text-right'>
+                            <a href="{{ path('logout') }}" class="btn btn-danger btn-mini"><i class='icon-remove icon-white'></i>&nbsp;Sair</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class='span12'>
+                {% block menuNav %}
+                {{ include ('menuNavCache'~app.session.get('id_perfil')~'.html') }}
+                {% endblock %}
+            </div>
+        </div>
+
+
+        {% endblock %}
+        <div id="content">
+            <div class="container-fluid">
+                <div class="row-fluid" >
+                    <div class="span12">
+                        {% if app.session.get('id_interno') %}
+                        <ul class='breadcrumb'>
+                            <li><i class='icon-chevron-right'></i>&nbsp;<strong>{{app.session.get('menu')}}</strong><span class='divider'>/</span></li>
+                            {% if app.session.get('menu_pai') %}
+                            <li><strong>{{app.session.get('menu_pai')}}</strong></strong><span class='divider'>/</span></li>
+                            {% endif %}
+                            <li class='text-error'><strong>{{app.session.get('titulo')}}</strong></li>
+                        </ul>
+                        {% endif %}
+                        {% for flashMessage in app.session.flashbag.get('debug_rfc') %}
+                        {% if flashMessage is not empty %}
+                        <pre class="well well-small" style='background: #f9ecec;'>{{ flashMessage }}</pre>
+                        {% endif %}
+                        {% endfor %}
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div><!-- #content-->
+    </div>
+    {% block footer %}{% endblock %}
+</body>
+</html>
